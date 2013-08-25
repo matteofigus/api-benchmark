@@ -1,0 +1,33 @@
+{
+  "name": "api-benchmark",
+  "version": "0.0.1",
+  "description": "A simple js library to compare performances of different apis",
+  "author": "Matteo Figus <matteofigus@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matteofigus/api-benchmark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/matteofigus/api-benchmark/issues"
+  },
+  "keywords": ["benchmark", "api", "performance", "test"],
+  "main":"index",
+  "engines": {
+    "node": ">=0.8.x",
+    "npm": ">=1.1.x"
+  },
+  "dependencies": {
+    "benchmark": "",
+    "superagent": ""
+  },
+  "devDependencies": {
+    "should": "",
+    "mocha": "",
+    "express": "",
+    "give-me": ""
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
