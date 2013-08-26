@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "benchmark": "",
-    "superagent": ""
+    "superagent": "",
+    "underscore": ""
   },
   "devDependencies": {
     "should": "",

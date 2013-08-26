@@ -6,12 +6,7 @@ var superagent = require('superagent');
 
 var services = {};
 
-var endpoints = { simpleRoute: '/getJson' };
-
-var options = {
-  debug: true,
-  maxTime: 2
-}
+var endpoints = { simpleRoute: '/getJson', secondaryRoute: '/getJson2' };
 
 var setupServer = function(name, serverPort, delay, callback){
   services[name] = "http://localhost:" + serverPort;
@@ -21,6 +16,12 @@ var setupServer = function(name, serverPort, delay, callback){
   app.get(endpoints.simpleRoute, function(req, res){
     setTimeout(function(){
       res.json({ message: "ok" });
+    }, delay);
+  });   
+
+  app.get(endpoints.secondaryRoute, function(req, res){
+    setTimeout(function(){
+      res.json({ message: "secondaryRoute" });
     }, delay);
   }); 
 
@@ -47,10 +48,22 @@ describe('compare function', function(){
   });
 
   it('should correctly recognize the fastest service', function(done) {
+    apiBenchmark.compare(services, { simpleRoute: endpoints.simpleRoute }, { maxTime: 1 }, function(results){
+      results['Fast server'].isFastest.should.be.eql(true);
+      done();
+    });
+  });
 
-    apiBenchmark.compare(services, endpoints, options, function(results){
-      results.should.be.a('object');
-      results.filter('fastest').pluck('name')[0].should.be.eql("Fast server/simpleRoute");
+  it('should work without the optional options parameter', function(done) {
+    apiBenchmark.compare(services, { simpleRoute: endpoints.simpleRoute }, function(results){
+      results['Fast server'].isFastest.should.be.eql(true);
+      done();
+    });
+  });
+
+  it('should correctly compare multiple routes', function(done) {
+    apiBenchmark.compare(services, endpoints, { debug: true }, function(results){
+      results['Fast server'].isFastest.should.be.eql(true);
       done();
     });
   });
