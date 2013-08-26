@@ -1,6 +1,5 @@
 var apiBenchmark = require('./../index');
 var express = require('express');
-var giveMe = require('give-me');
 var should = require('should');
 var superagent = require('superagent');
 
