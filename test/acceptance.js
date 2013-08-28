@@ -47,7 +47,7 @@ describe('compare function', function(){
   });
 
   it('should correctly recognize the fastest service', function(done) {
-    apiBenchmark.compare(services, { simpleRoute: endpoints.simpleRoute }, { maxTime: 1 }, function(results){
+    apiBenchmark.compare(services, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });
