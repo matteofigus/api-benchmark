@@ -31,7 +31,7 @@ describe('compare function', function(){
   });
 
   it('should correctly compare multiple routes', function(done) {
-    apiBenchmark.compare(testServers.services, endpoints, { debug: true }, function(results){
+    apiBenchmark.compare(testServers.services, endpoints, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });
