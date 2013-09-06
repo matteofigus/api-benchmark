@@ -55,7 +55,7 @@ describe('getBenchmarkAverage function', function(){
       route2: { numericValues: 3 }
     });
 
-    var average = benchmarkUtils.getBenchmarkAverage(testServerResults, "serverName");
+    var average = benchmarkUtils.getBenchmarkAverage(testServerResults.serverName, "serverName");
 
     average.should.be.eql({
       name: "serverName",
