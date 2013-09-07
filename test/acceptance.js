@@ -1,7 +1,7 @@
 var apiBenchmark = require('./../index');
 var should = require('should');
 var superagent = require('superagent');
-var TestServers = require('./utils/test-servers');
+var TestServers = require('./fixtures/test-servers');
 
 describe('compare function', function(){
 

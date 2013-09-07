@@ -16,12 +16,11 @@ var testData = {
   },
   getServerResults: function(serverName, routes){
     var results = {};
-    results[serverName] = {};
 
     for(route in routes){
       var nVal = routes[route].numericValues;
 
-      results[serverName][route] = {
+      results[route] = {
         name: serverName + "/" + route,
         stats: { moe: nVal, rme: nVal, deviation: nVal, variance: nVal, mean: nVal, sem: nVal},
         cycles: nVal,
@@ -33,8 +32,8 @@ var testData = {
   getServersResults: function(serversArray){
     var results = {};
     for(var i = 0; i < serversArray.length; i++)
-      results[serversArray[i].name] = testData.getServerResults(serversArray[i].name, serversArray[i].routes)[serversArray[i].name];
-    
+      results[serversArray[i].name] = testData.getServerResults(serversArray[i].name, serversArray[i].routes);
+
     return results;
   }
 };

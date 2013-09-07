@@ -1,6 +1,6 @@
 var benchmarkUtils = require('./../../lib/benchmark-utils');
 var should = require('should');
-var testData = require('./../utils/test-data');
+var testData = require('./../fixtures/test-data');
 
 describe('sort function', function(){
 
@@ -55,7 +55,7 @@ describe('getBenchmarkAverage function', function(){
       route2: { numericValues: 3 }
     });
 
-    var average = benchmarkUtils.getBenchmarkAverage(testServerResults.serverName, "serverName");
+    var average = benchmarkUtils.getBenchmarkAverage(testServerResults, "serverName");
 
     average.should.be.eql({
       name: "serverName",
