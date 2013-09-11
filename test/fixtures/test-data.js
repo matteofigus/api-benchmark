@@ -35,6 +35,11 @@ var testData = {
       results[serversArray[i].name] = testData.getServerResults(serversArray[i].name, serversArray[i].routes);
 
     return results;
+  },
+  getFakeBenchmarkObject: function(){
+    return { 
+      Suites: {}
+    };
   }
 };
 
