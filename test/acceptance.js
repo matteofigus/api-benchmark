@@ -16,6 +16,31 @@ describe('compare function', function(){
     testServers = new TestServers(endpoints, servers, done);
   });
 
+  it('should correctly raise exception if the endpoints parameter is not valid', function(done){
+    (function(){
+      apiBenchmark.compare(testServers.services, null, function(results){
+
+      });
+    }).should.throw("Endpoints argument is not valid");
+    done();
+  });
+
+  it('should correctly raise exception if the services parameter is not valid', function(done){
+    (function(){
+      apiBenchmark.compare(null, endpoints, function(results){
+
+      });
+    }).should.throw("Services argument is not valid");
+    done();
+  });
+
+  it('should correctly raise exception if the callback parameter is not valid', function(done){
+    (function(){
+      apiBenchmark.compare(testServers.services, endpoints, null);
+    }).should.throw("Callback argument is not valid");
+    done();
+  });
+
   it('should correctly recognize the fastest service', function(done) {
     apiBenchmark.compare(testServers.services, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
