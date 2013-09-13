@@ -1,12 +1,22 @@
 var apiBenchmark = require('./../index');
 var should = require('should');
-var superagent = require('superagent');
 var TestServers = require('./fixtures/test-servers');
 
 describe('compare function', function(){
 
   var testServers,
-      endpoints = { simpleRoute: '/getJson', secondaryRoute: '/getJson2' };
+      endpoints = { 
+        simpleRoute: '/getJson', 
+        secondaryRoute: '/getJson2',
+        postRoute: {
+          route: '/postJson',
+          method: 'post',
+          data: {
+            test: true,
+            someData: 'someStrings'
+          }
+        }
+      };
 
   before(function(done){
 
@@ -14,31 +24,6 @@ describe('compare function', function(){
                    { name: "Fast server", port: 3007, delay: 0}];
 
     testServers = new TestServers(endpoints, servers, done);
-  });
-
-  it('should correctly raise exception if the endpoints parameter is not valid', function(done){
-    (function(){
-      apiBenchmark.compare(testServers.services, null, function(results){
-
-      });
-    }).should.throw("Endpoints argument is not valid");
-    done();
-  });
-
-  it('should correctly raise exception if the services parameter is not valid', function(done){
-    (function(){
-      apiBenchmark.compare(null, endpoints, function(results){
-
-      });
-    }).should.throw("Services argument is not valid");
-    done();
-  });
-
-  it('should correctly raise exception if the callback parameter is not valid', function(done){
-    (function(){
-      apiBenchmark.compare(testServers.services, endpoints, null);
-    }).should.throw("Callback argument is not valid");
-    done();
   });
 
   it('should correctly recognize the fastest service', function(done) {
@@ -56,7 +41,14 @@ describe('compare function', function(){
   });
 
   it('should correctly compare multiple routes', function(done) {
-    apiBenchmark.compare(testServers.services, endpoints, function(results){
+    apiBenchmark.compare(testServers.services, { simpleRoute: endpoints.simpleRoute, secondaryRoute: endpoints.secondaryRoute }, function(results){
+      results['Fast server'].isFastest.should.be.eql(true);
+      done();
+    });
+  });
+
+  it('should correctly handle post routes', function(done) {
+    apiBenchmark.compare(testServers.services, { postRoute: endpoints.postRoute }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });

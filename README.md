@@ -26,6 +26,23 @@ A simple node.js tool to compare performances of different apis
       // displays some stats, including the winner!
     });
 
+Different Http verbs are supported:
+
+	var apiBenchmark = require('api-benchmark');
+	
+	var services = { 
+		server1: "http://myserver:myport/mypath",
+		server2: "http://myserver2:myport2/mypath2",
+	};
+
+	var routes = { route3: { method: 'post', route: '/postRoute', data: { test: true, moreData: 'aString' }}};
+
+	apiBenchmark.compare(services, routes, function(results){
+      console.log(results);
+      // displays some stats, including the winner!
+    });
+
+
 # License
 
 MIT

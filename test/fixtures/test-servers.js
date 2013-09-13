@@ -6,7 +6,13 @@ module.exports = function(endpoints, servers, callback){
   this.app = {};
 
   this.setupRoute = function(route, response, delay){
-    this.app.get(route, function(req, res){
+    if(typeof route === 'string')
+      route = {
+        route: route,
+        method: 'get'
+      };
+
+    this.app[route.method](route.route, function(req, res){
       setTimeout(function(){
         res.json(response);
       }, delay);
