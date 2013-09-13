@@ -35,7 +35,21 @@ Different Http verbs are supported:
 		server2: "http://myserver2:myport2/mypath2",
 	};
 
-	var routes = { route3: { method: 'post', route: '/postRoute', data: { test: true, moreData: 'aString' }}};
+	var routes = { 
+		route1: {
+			method: 'get',
+			route: '/getRoute'
+		},
+		route2: '/getRoute2',
+		route3: { 
+			method: 'post', 
+			route: '/postRoute', 
+			data: { 
+				test: true, 
+				moreData: 'aString' 
+			}
+		}
+	};
 
 	apiBenchmark.compare(services, routes, function(results){
       console.log(results);
