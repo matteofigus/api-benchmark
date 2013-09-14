@@ -31,8 +31,19 @@ describe('addEndpoints function', function(){
     var suites = new SuitesManager(testData.getFakeBenchmarkObject());
 
     (function(){
-      suites.addEndpoints([]);
+      suites.addEndpoints({});
     }).should.throw("Endpoints argument is not valid");
+
+    done();
+  });
+
+  it('should correctly raise exception if an endpoint contains an unsupported method', function(done) {
+
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject());
+
+    (function(){
+      suites.addEndpoints({ routeName: { route: '/route', method: 'unsupported' }});
+    }).should.throw("Endpoints argument is not valid - found an unsupported http verb");
 
     done();
   });
