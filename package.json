@@ -1,6 +1,6 @@
 {
   "name": "api-benchmark",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A simple nodejs tool to compare performances of different apis",
   "author": "Matteo Figus <matteofigus@gmail.com>",
   "license": "MIT",
