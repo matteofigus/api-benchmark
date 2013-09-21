@@ -2,7 +2,7 @@ api-benchmark
 =============
 [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark)
 
-A simple node.js tool to compare performances of different apis
+A node.js tool that compares performances of different apis using [BenchmarkJs](http://benchmarkjs.com/)
 
 # Installation
 
@@ -26,7 +26,7 @@ A simple node.js tool to compare performances of different apis
       // displays some stats, including the winner!
     });
 
-Different Http verbs are supported:
+All the Http verbs and headers are supported:
 
 	var apiBenchmark = require('api-benchmark');
 	
@@ -38,7 +38,11 @@ Different Http verbs are supported:
 	var routes = { 
 		route1: {
 			method: 'get',
-			route: '/getRoute'
+			route: '/getRoute',
+			header: {
+		        'Cookie': 'cookieName=value',
+		        'Accept': 'application/json'
+			}
 		},
 		route2: '/getRoute2',
 		route3: { 
@@ -56,6 +60,30 @@ Different Http verbs are supported:
       // displays some stats, including the winner!
     });
 
+### Options
+
+#### debug
+	(Boolean): Displays some info on the console
+
+#### delay
+	(Number): The delay between test cycles (secs)
+
+#### initCount
+	(Number): The default number of times to execute a test on a benchmark's first cycle.
+
+#### maxTime
+	(Number): The maximum time a benchmark is allowed to run before finishing (secs).
+	Note: Cycle delays aren't counted toward the maximum time.
+
+#### minSamples
+	(Number): The minimum sample size required to perform statistical analysis.
+
+#### minTime
+	(Number): The time needed to reduce the percent uncertainty of measurement to 1% (secs).
+
+# Tests
+
+	npm test
 
 # License
 
