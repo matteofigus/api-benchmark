@@ -32,11 +32,11 @@ describe('requestHandler.make function', function(){
       requestHandler.make({ 
         route: '/get',
         method: 'get',
-        header: {
+        headers: {
           'Cookie': 'hello=world'
         }
       }, function(fakeResults){
-        fakeResults.header.should.be.eql({ Cookie: 'hello=world'});
+        fakeResults.headers.should.be.eql({ Cookie: 'hello=world'});
         done();
       });
   });
@@ -45,13 +45,13 @@ describe('requestHandler.make function', function(){
       requestHandler.make({ 
         route: '/get',
         method: 'get',
-        header: {
+        headers: {
           'Cookie': 'cookieName=value',
           'Accept': 'application/json'
         }
       }, function(fakeResults){
-        fakeResults.header.Accept.should.be.eql('application/json');
-        fakeResults.header.Cookie.should.be.eql('cookieName=value');
+        fakeResults.headers.Accept.should.be.eql('application/json');
+        fakeResults.headers.Cookie.should.be.eql('cookieName=value');
         done();
       });
   });

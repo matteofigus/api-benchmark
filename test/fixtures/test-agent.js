@@ -3,7 +3,7 @@ module.exports.FakeAgent = function(){
   this.end = function(callback){
     callback({
       data: this.data,
-      header: this.header
+      headers: this.headers
     });
   };
   
@@ -21,7 +21,7 @@ module.exports.FakeAgent = function(){
   };
 
   this.set = function(name, value){
-    this.header = this.header || {};
-    this.header[name] = value;
+    this.headers = this.headers || {};
+    this.headers[name] = value;
   }; 
 };

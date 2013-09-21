@@ -39,7 +39,7 @@ All the Http verbs and headers are supported:
 		route1: {
 			method: 'get',
 			route: '/getRoute',
-			header: {
+			headers: {
 		        'Cookie': 'cookieName=value',
 		        'Accept': 'application/json'
 			}

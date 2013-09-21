@@ -38,7 +38,7 @@ var testData = {
   },
   getFakeBenchmarkObject: function(){
     return { 
-      Suites: {}
+      Suite: function(){}
     };
   }
 };
