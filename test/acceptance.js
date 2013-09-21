@@ -15,6 +15,10 @@ describe('compare function', function(){
             test: true,
             someData: 'someStrings'
           }
+        },
+        deleteRoute: {
+          route: '/deleteMe?test=true',
+          method: 'delete'
         }
       };
 
@@ -49,6 +53,13 @@ describe('compare function', function(){
 
   it('should correctly handle post routes', function(done) {
     apiBenchmark.compare(testServers.services, { postRoute: endpoints.postRoute }, function(results){
+      results['Fast server'].isFastest.should.be.eql(true);
+      done();
+    });
+  });
+
+  it('should correctly handle delete routes', function(done) {
+    apiBenchmark.compare(testServers.services, { deleteRoute: endpoints.deleteRoute }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });

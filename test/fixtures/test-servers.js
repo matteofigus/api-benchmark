@@ -12,7 +12,11 @@ module.exports = function(endpoints, servers, callback){
         method: 'get'
       };
 
-    this.app[route.method](route.route, function(req, res){
+    var routeAddress = (route.route.indexOf("?") >= 0) ?
+                       route.route.substr(0, route.route.indexOf("?")) :
+                       route.route;
+
+    this.app[route.method](routeAddress, function(req, res){
       setTimeout(function(){
         res.json(response);
       }, delay);
