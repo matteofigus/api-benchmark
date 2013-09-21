@@ -4,6 +4,8 @@ api-benchmark
 
 A node.js tool that compares performances of different apis using [BenchmarkJs](http://benchmarkjs.com/)
 
+To see an example of a request/response [look at this gist](https://gist.github.com/matteofigus/6651234)
+
 # Installation
 
 	npm install api-benchmark
