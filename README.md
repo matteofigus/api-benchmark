@@ -91,3 +91,7 @@ All the Http verbs and headers are supported:
 # License
 
 MIT
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/matteofigus/api-benchmark/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
