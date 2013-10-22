@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "benchmark": "1.0.0",
-    "superagent": "1.15.7",
+    "superagent": "0.15.7",
     "underscore": "1.5.2"
   },
   "devDependencies": {
