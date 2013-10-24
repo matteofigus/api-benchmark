@@ -1,9 +1,8 @@
 api-benchmark
 =============
 [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/matteofigus/api-benchmark/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
-A node.js tool that compares performances of different apis using [BenchmarkJs](http://benchmarkjs.com/)
+A node.js tool that misures and compares performances of single and multiple apis using [BenchmarkJs](http://benchmarkjs.com/)
 
 To see an example of a request/response [look at this gist](https://gist.github.com/matteofigus/6651234)
 
@@ -13,7 +12,26 @@ To see an example of a request/response [look at this gist](https://gist.github.
 
 # Usage
 
+### misure(service, routes, [, options], callback)
+
+Misures performances of a given api for multiple routes
+
+	var apiBenchmark = require('api-benchmark');
+	
+	var service = { 
+		server1: "http://myserver:myport/mypath"
+	};
+
+	var routes = { route1: '/route1', route2: '/route2' };
+
+	apiBenchmark.misure(service, routes, function(results){
+      console.log(results);
+      // displays some stats!
+    });
+
 ### compare(services, routes, [, options], callback)
+
+Compares performances of a given list of api servers with the same routes. Useful in case of load balancers, globalised services, deployment of new versions.
 
 	var apiBenchmark = require('api-benchmark');
 	
@@ -91,3 +109,5 @@ All the Http verbs and headers are supported:
 # License
 
 MIT
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/matteofigus/api-benchmark/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

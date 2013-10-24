@@ -1,6 +1,6 @@
-var apiBenchmark = require('./../index');
+var apiBenchmark = require('./../../index');
 var should = require('should');
-var TestServers = require('./fixtures/test-servers');
+var TestServers = require('./../fixtures/test-servers');
 
 describe('compare function', function(){
 
@@ -28,6 +28,11 @@ describe('compare function', function(){
                    { name: "Fast server", port: 3007, delay: 0}];
 
     testServers = new TestServers(endpoints, servers, done);
+  });
+
+  after(function(done){
+    testServers.kill();
+    done();
   });
 
   it('should correctly recognize the fastest service', function(done) {

@@ -5,7 +5,7 @@ module.exports = function(endpoints, servers, callback){
   this.endpoints = endpoints;
   this.app = {};
 
-  this.setupRoute = function(route, response, delay){
+  this.setupRoute = function(name, route, response, delay){
     if(typeof route === 'string')
       route = {
         route: route,
@@ -16,7 +16,7 @@ module.exports = function(endpoints, servers, callback){
                        route.route.substr(0, route.route.indexOf("?")) :
                        route.route;
 
-    this.app[route.method](routeAddress, function(req, res){
+    this.app[name][route.method](routeAddress, function(req, res){
       setTimeout(function(){
         res.json(response);
       }, delay);
@@ -27,13 +27,18 @@ module.exports = function(endpoints, servers, callback){
   this.setupServer = function(name, serverPort, delay, callback){
 
     this.services[name] = "http://localhost:" + serverPort;
-    this.app = express();
+    this.app[name] = express();
 
     for(routeName in this.endpoints)
-      this.setupRoute(this.endpoints[routeName], { message: routeName }, delay);
+      this.setupRoute(name, this.endpoints[routeName], { message: routeName }, delay);
 
-    this.app.listen(serverPort, callback);
+    this.app[name] = this.app[name].listen(serverPort, callback);
   };
+
+  this.kill = function(){
+    for(var i = 0; i < servers.length; i++)
+      this.app[servers[i].name].close();
+  }
 
   var serversInitialized = 0;
   var done = function(){

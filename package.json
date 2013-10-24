@@ -1,7 +1,7 @@
 {
   "name": "api-benchmark",
-  "version": "0.0.10",
-  "description": "A simple nodejs tool to compare performances of different apis",
+  "version": "0.0.11",
+  "description": "A simple nodejs tool to misure and compare performances of api services",
   "author": "Matteo Figus <matteofigus@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/matteofigus/api-benchmark/issues"
   },
-  "keywords": ["benchmark", "api", "performance", "test"],
+  "keywords": ["benchmark", "api", "performance", "test", "load balancer", "deployment", "continuous delivery"],
   "main":"index",
   "engines": {
     "node": ">=0.8.x",

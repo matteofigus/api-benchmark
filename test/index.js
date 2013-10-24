@@ -5,7 +5,10 @@ var runAcceptanceTests = function(callback){
 	console.log("Running acceptance tests...");
 	var acceptance = new Mocha({timeout: 20000 });
 
-	acceptance.addFile('./test/acceptance.js');
+	fs.readdirSync('./test/acceptance/')
+		.filter(function(file){ return file.substr(-3) === '.js';})
+		.forEach(function(file){ acceptance.addFile('./test/acceptance/' + file); });
+
 	acceptance.run(callback);
 };
 
