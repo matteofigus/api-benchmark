@@ -12,7 +12,7 @@ To see an example of a request/response [look at this gist](https://gist.github.
 
 # Usage
 
-### misure(service, routes, [, options], callback)
+### misure(service, routes, [options, ] callback)
 
 Misures performances of a given api for multiple routes
 
@@ -29,7 +29,7 @@ Misures performances of a given api for multiple routes
       // displays some stats!
     });
 
-### compare(services, routes, [, options], callback)
+### compare(services, routes, [options, ] callback)
 
 Compares performances of a given list of api servers with the same routes. Useful in case of load balancers, globalised services, deployment of new versions.
 
