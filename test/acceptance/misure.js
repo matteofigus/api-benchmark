@@ -28,8 +28,7 @@ describe('misure function', function(){
   });
 
   after(function(done){
-    testServers.kill();
-    done();
+    testServers.kill(done);
   });
 
   it('should correctly misure the performances of the service', function(done) {

@@ -35,10 +35,22 @@ module.exports = function(endpoints, servers, callback){
     this.app[name] = this.app[name].listen(serverPort, callback);
   };
 
-  this.kill = function(){
+  this.kill = function(callback){
+    var serversToClose = servers.length;
+
+    var tryPerformingCallback = function(){
+      if(serversToClose == 0 && typeof callback === 'function')
+        callback();
+    };
+
     for(var i = 0; i < servers.length; i++)
-      this.app[servers[i].name].close();
-  }
+      this.app[servers[i].name].close(function(){
+        serversToClose--;
+        tryPerformingCallback();
+      });
+
+    tryPerformingCallback();
+  };
 
   var serversInitialized = 0;
   var done = function(){

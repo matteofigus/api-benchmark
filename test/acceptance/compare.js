@@ -31,8 +31,7 @@ describe('compare function', function(){
   });
 
   after(function(done){
-    testServers.kill();
-    done();
+    testServers.kill(done);
   });
 
   it('should correctly recognize the fastest service', function(done) {
