@@ -23,7 +23,7 @@ describe('misure function', function(){
       };
 
   before(function(done){
-    var server = { name: "My api", port: 3006, delay: 200 };
+    var server = { name: "My api", port: 3006, delay: 0 };
     testServers = new TestServers(endpoints, [server], done);
   });
 
