@@ -52,12 +52,12 @@ module.exports = function(endpoints, servers, callback){
     };
 
     for(var i = 0; i < servers.length; i++){
-      if(!serverCloseRequiresCallback){ console.log('sync conn close');
+      if(!serverCloseRequiresCallback){
         this.app[servers[i].name].close();
         serversToClose--;
         tryPerformingCallback();
       } else {
-        this.app[servers[i].name].close(function(){ console.log('async conn close');
+        this.app[servers[i].name].close(function(){
           serversToClose--;
           tryPerformingCallback();
         });
