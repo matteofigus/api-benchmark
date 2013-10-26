@@ -39,8 +39,8 @@ module.exports = function(endpoints, servers, callback){
 
     var serverCloseHasCallback = function(server){
       // node.js version 0.6's http.close does not implement a callback :(
-      var args = server.close.toString().match (/function\s*\w*\s*\((.*?)\)/)[1].split (/\s*,\s*/); console.log(args)
-      return args.length > 0;
+      var args = server.close.toString().match (/function\s*\w*\s*\((.*?)\)/)[1].split (/\s*,\s*/);
+      return args.length > 0 && args[0] != '';
     }
 
     var serversToClose = servers.length,
