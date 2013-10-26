@@ -36,18 +36,33 @@ module.exports = function(endpoints, servers, callback){
   };
 
   this.kill = function(callback){
-    var serversToClose = servers.length;
+
+    var serverCloseHasCallback = function(server){
+      // node.js version 0.6's http.close does not implement a callback :(
+      var args = server.close.toString().match (/function\s*\w*\s*\((.*?)\)/)[1].split (/\s*,\s*/);
+      return args.length > 0;
+    }
+
+    var serversToClose = servers.length,
+        serverCloseRequiresCallback = servers.length == 0 ? false : serverCloseHasCallback(this.app[servers[0].name]);
 
     var tryPerformingCallback = function(){
       if(serversToClose == 0 && typeof callback === 'function')
         callback();
     };
 
-    for(var i = 0; i < servers.length; i++)
-      this.app[servers[i].name].close(function(){
+    for(var i = 0; i < servers.length; i++){
+      if(!serverCloseRequiresCallback){ console.log('sync conn close');
+        this.app[servers[i].name].close();
         serversToClose--;
         tryPerformingCallback();
-      });
+      } else {
+        this.app[servers[i].name].close(function(){ console.log('async conn close');
+          serversToClose--;
+          tryPerformingCallback();
+        });
+      }
+    }
 
     tryPerformingCallback();
   };
