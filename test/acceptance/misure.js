@@ -37,4 +37,11 @@ describe('misure function', function(){
       done();
     });
   });
+
+  it('should correctly display hrefs for each result', function(done) {
+    apiBenchmark.misure(testServers.services, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(results){
+      results['My api'].simpleRoute.href.should.be.eql("http://localhost:3006/getJson");
+      done();
+    });
+  });
 });
