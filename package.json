@@ -25,7 +25,7 @@
   "devDependencies": {
     "should": "",
     "mocha": "",
-    "http-test-servers": ""
+    "http-test-servers": "0.0.5"
   },
   "scripts": {
     "test": "node test/index"
