@@ -2,7 +2,7 @@ var apiBenchmark = require('./../../index');
 var should = require('should');
 var TestServers = require('http-test-servers');
 
-describe('misure function', function(){
+describe('measure function', function(){
 
   var testServers,
       server = { "My api": { port: 3006, delay: 0 }},
@@ -37,15 +37,15 @@ describe('misure function', function(){
     testServers.kill(done);
   });
 
-  it('should correctly misure the performances of the service', function(done) {
-    apiBenchmark.misure(serversToBenchmark, endpoints, { maxTime: 0.5 }, function(results){
+  it('should correctly measure the performances of the service', function(done) {
+    apiBenchmark.measure(serversToBenchmark, endpoints, { maxTime: 0.5 }, function(results){
       results['My api'].should.not.be.eql(null);
       done();
     });
   });
 
   it('should correctly display hrefs for each result', function(done) {
-    apiBenchmark.misure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(results){
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(results){
       results['My api'].simpleRoute.href.should.be.eql("http://localhost:3006/getJson");
       done();
     });

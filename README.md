@@ -2,7 +2,7 @@ api-benchmark
 =============
 [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark)
 
-A node.js tool that misures and compares performances of single and multiple apis using [BenchmarkJs](http://benchmarkjs.com/)
+A node.js tool that measures and compares performances of single and multiple apis using [BenchmarkJs](http://benchmarkjs.com/)
 
 To see an example of a request/response [look at this gist](https://gist.github.com/matteofigus/6651234)
 
@@ -12,9 +12,9 @@ To see an example of a request/response [look at this gist](https://gist.github.
 
 # Usage
 
-### misure(service, routes, [options, ] callback)
+### measure(service, routes, [options, ] callback)
 
-Misures performances of a given api for multiple routes
+Measures performances of a given api for multiple routes
 
 	var apiBenchmark = require('api-benchmark');
 	
@@ -24,7 +24,7 @@ Misures performances of a given api for multiple routes
 
 	var routes = { route1: '/route1', route2: '/route2' };
 
-	apiBenchmark.misure(service, routes, function(results){
+	apiBenchmark.measure(service, routes, function(results){
       console.log(results);
       // displays some stats!
     });
