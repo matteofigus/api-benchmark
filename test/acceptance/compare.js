@@ -1,11 +1,17 @@
 var apiBenchmark = require('./../../index');
 var should = require('should');
-var TestServers = require('./../fixtures/test-servers');
+var TestServers = require('http-test-servers');
 
 describe('compare function', function(){
 
   var testServers,
-      endpoints = { 
+      servers = { "Slow server": { port: 3006, delay: 200 }, 
+                  "Fast server": { port: 3007, delay: 0 }};
+
+  var serversToBenchmark = { "Slow server": "http://localhost:3006",
+                             "Fast server": "http://localhost:3007"};
+
+  var endpoints = { 
         simpleRoute: '/getJson', 
         secondaryRoute: '/getJson2',
         postRoute: {
@@ -24,10 +30,11 @@ describe('compare function', function(){
 
   before(function(done){
 
-    var servers = [{ name: "Slow server", port: 3006, delay: 200 }, 
-                   { name: "Fast server", port: 3007, delay: 0}];
-
-    testServers = new TestServers(endpoints, servers, done);
+    var serversToStart = new TestServers(endpoints, servers);
+    serversToStart.start(function(httpTestServers){
+      testServers = httpTestServers;
+      done();
+    });
   });
 
   after(function(done){
@@ -35,35 +42,35 @@ describe('compare function', function(){
   });
 
   it('should correctly recognize the fastest service', function(done) {
-    apiBenchmark.compare(testServers.services, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(results){
+    apiBenchmark.compare(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });
   });
 
   it('should work without the optional options parameter', function(done) {
-    apiBenchmark.compare(testServers.services, { simpleRoute: endpoints.simpleRoute }, function(results){
+    apiBenchmark.compare(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });
   });
 
   it('should correctly compare multiple routes', function(done) {
-    apiBenchmark.compare(testServers.services, { simpleRoute: endpoints.simpleRoute, secondaryRoute: endpoints.secondaryRoute }, function(results){
+    apiBenchmark.compare(serversToBenchmark, { simpleRoute: endpoints.simpleRoute, secondaryRoute: endpoints.secondaryRoute }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });
   });
 
   it('should correctly handle post routes', function(done) {
-    apiBenchmark.compare(testServers.services, { postRoute: endpoints.postRoute }, function(results){
+    apiBenchmark.compare(serversToBenchmark, { postRoute: endpoints.postRoute }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });
   });
 
   it('should correctly handle delete routes', function(done) {
-    apiBenchmark.compare(testServers.services, { deleteRoute: endpoints.deleteRoute }, function(results){
+    apiBenchmark.compare(serversToBenchmark, { deleteRoute: endpoints.deleteRoute }, function(results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });

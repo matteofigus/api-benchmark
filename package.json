@@ -1,6 +1,6 @@
 {
   "name": "api-benchmark",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A simple nodejs tool to misure and compare performances of api services",
   "author": "Matteo Figus <matteofigus@gmail.com>",
   "license": "MIT",
@@ -25,7 +25,7 @@
   "devDependencies": {
     "should": "",
     "mocha": "",
-    "express": ""
+    "http-test-servers": ""
   },
   "scripts": {
     "test": "node test/index"
