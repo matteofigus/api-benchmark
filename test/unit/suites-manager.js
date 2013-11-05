@@ -1,16 +1,18 @@
+var DebugHelper = require('./../../lib/debug-helper');
 var SuitesManager = require('./../../lib/suites-manager');
 var should = require('should');
 var testAgent = require('./../fixtures/test-agent');
 var testData = require('./../fixtures/test-data');
 var _ = require('underscore');
 
-var fakeAgent = new testAgent.FakeAgent();
+var fakeAgent = new testAgent.FakeAgent(),
+    debugHelper = new DebugHelper();
 
 describe('addEndpoints function', function(){
 
   it('should correctly raise exception if endpoints is null', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.addEndpoints(null);
@@ -21,7 +23,7 @@ describe('addEndpoints function', function(){
 
   it('should correctly raise exception if endpoints is not an object', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.addEndpoints([]);
@@ -32,7 +34,7 @@ describe('addEndpoints function', function(){
 
   it('should correctly raise exception if endpoints is an empty object', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.addEndpoints({});
@@ -43,7 +45,7 @@ describe('addEndpoints function', function(){
 
   it('should correctly raise exception if an endpoint contains an unsupported method', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.addEndpoints({ routeName: { route: '/route', method: 'unsupported' }});
@@ -54,7 +56,7 @@ describe('addEndpoints function', function(){
 
   it('should correctly handle headers for specific endpoints', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     suites.addEndpoints({ routeName: { route: '/route', method: 'get', headers: { 'name': 'value' } }});
 
@@ -70,7 +72,7 @@ describe('addServices function', function(){
 
   it('should correctly raise exception if services is null', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.addServices(null);
@@ -81,7 +83,7 @@ describe('addServices function', function(){
 
   it('should correctly raise exception if services is not an object', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.addServices([]);
@@ -92,7 +94,7 @@ describe('addServices function', function(){
 
   it('should correctly raise exception if services is an empty object', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.addServices([]);
@@ -106,7 +108,7 @@ describe('onBenchResults function', function(){
 
   it('should correctly raise exception if the callback is null', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.onBenchResults(null);
@@ -117,7 +119,7 @@ describe('onBenchResults function', function(){
 
   it('should correctly raise exception if the callback is not a function', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent);
+    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
     (function(){
       suites.onBenchResults({});

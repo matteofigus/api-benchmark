@@ -14,7 +14,7 @@ var runAcceptanceTests = function(callback){
 
 var runUnitTests = function(callback){
 	console.log("Running unit tests...");
-	var unit = new Mocha();
+	var unit = new Mocha({timeout: 60000 });
 
 	fs.readdirSync('./test/unit/')
 		.filter(function(file){ return file.substr(-3) === '.js';})
