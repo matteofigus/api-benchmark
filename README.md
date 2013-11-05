@@ -16,6 +16,7 @@ To see an example of a request/response [look at this gist](https://gist.github.
 
 Measures performances of a given api for multiple routes
 
+```js
 	var apiBenchmark = require('api-benchmark');
 	
 	var service = { 
@@ -28,11 +29,13 @@ Measures performances of a given api for multiple routes
     console.log(results);
     // displays some stats!
   });
+```
 
 ### compare(services, routes, [options, ] callback)
 
 Compares performances of a given list of api servers with the same routes. Useful in case of load balancers, globalised services, deployment of new versions.
 
+```js
 	var apiBenchmark = require('api-benchmark');
 	
 	var services = { 
@@ -43,12 +46,14 @@ Compares performances of a given list of api servers with the same routes. Usefu
 	var routes = { route1: '/route1', route2: '/route2' };
 
 	apiBenchmark.compare(services, routes, function(err, results){
-      console.log(results);
-      // displays some stats, including the winner!
-    });
+    console.log(results);
+    // displays some stats, including the winner!
+  });
+```
 
 All the Http verbs and headers are supported.
 
+```js
 	var apiBenchmark = require('api-benchmark');
 	
 	var services = { 
@@ -80,9 +85,11 @@ All the Http verbs and headers are supported.
     console.log(results);
     // displays some stats, including the winner!
   });
+```
 
 To check the response use the optional 'expectedStatusCode' parameter for a specific route. If the status code of the response is wrong, the benchmarks will terminate and an appropriate error will be fired.
-	
+
+```js	
 	var apiBenchmark = require('api-benchmark');
 	
 	var services = { 
@@ -102,6 +109,7 @@ To check the response use the optional 'expectedStatusCode' parameter for a spec
     console.log(err);
     // displays 'Expected Status code was 200 but I got a 404 for server1/route1'
   });
+```
 
 ### Options
 
