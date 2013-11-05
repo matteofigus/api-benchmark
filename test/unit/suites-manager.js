@@ -14,9 +14,9 @@ describe('addEndpoints function', function(){
 
     var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
-    (function(){
-      suites.addEndpoints(null);
-    }).should.throw("Endpoints argument is not valid");
+    suites.addEndpoints(null);
+
+    suites.error.should.be.eql("Endpoints argument is not valid");
 
     done();
   });
@@ -25,9 +25,9 @@ describe('addEndpoints function', function(){
 
     var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
-    (function(){
-      suites.addEndpoints([]);
-    }).should.throw("Endpoints argument is not valid");
+    suites.addEndpoints([]);
+    
+    suites.error.should.be.eql("Endpoints argument is not valid");
 
     done();
   });
@@ -36,9 +36,9 @@ describe('addEndpoints function', function(){
 
     var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
-    (function(){
-      suites.addEndpoints({});
-    }).should.throw("Endpoints argument is not valid");
+    suites.addEndpoints({});
+
+    suites.error.should.be.eql("Endpoints argument is not valid");
 
     done();
   });
@@ -47,9 +47,9 @@ describe('addEndpoints function', function(){
 
     var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
-    (function(){
-      suites.addEndpoints({ routeName: { route: '/route', method: 'unsupported' }});
-    }).should.throw("Endpoints argument is not valid - found an unsupported http verb");
+    suites.addEndpoints({ routeName: { route: '/route', method: 'unsupported' }});
+    
+    suites.error.should.be.eql("Endpoints argument is not valid - found an unsupported http verb");
 
     done();
   });
@@ -74,9 +74,9 @@ describe('addServices function', function(){
 
     var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
-    (function(){
-      suites.addServices(null);
-    }).should.throw("Services argument is not valid");
+    suites.addServices(null);
+
+    suites.error.should.be.eql("Services argument is not valid");
 
     done();
   });
@@ -85,9 +85,9 @@ describe('addServices function', function(){
 
     var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
-    (function(){
-      suites.addServices([]);
-    }).should.throw("Services argument is not valid");
+    suites.addServices([]);
+    
+    suites.error.should.be.eql("Services argument is not valid");
 
     done();
   });
@@ -96,9 +96,9 @@ describe('addServices function', function(){
 
     var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
 
-    (function(){
-      suites.addServices([]);
-    }).should.throw("Services argument is not valid");
+    suites.addServices([]);
+    
+    suites.error.should.be.eql("Services argument is not valid");
 
     done();
   });

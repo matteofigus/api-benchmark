@@ -24,10 +24,10 @@ Measures performances of a given api for multiple routes
 
 	var routes = { route1: '/route1', route2: '/route2' };
 
-	apiBenchmark.measure(service, routes, function(results){
-      console.log(results);
-      // displays some stats!
-    });
+	apiBenchmark.measure(service, routes, function(err, results){
+    console.log(results);
+    // displays some stats!
+  });
 
 ### compare(services, routes, [options, ] callback)
 
@@ -42,12 +42,12 @@ Compares performances of a given list of api servers with the same routes. Usefu
 
 	var routes = { route1: '/route1', route2: '/route2' };
 
-	apiBenchmark.compare(services, routes, function(results){
+	apiBenchmark.compare(services, routes, function(err, results){
       console.log(results);
       // displays some stats, including the winner!
     });
 
-All the Http verbs and headers are supported:
+All the Http verbs and headers are supported.
 
 	var apiBenchmark = require('api-benchmark');
 	
@@ -76,10 +76,32 @@ All the Http verbs and headers are supported:
 		}
 	};
 
-	apiBenchmark.compare(services, routes, function(results){
-      console.log(results);
-      // displays some stats, including the winner!
-    });
+	apiBenchmark.compare(services, routes, function(err, results){
+    console.log(results);
+    // displays some stats, including the winner!
+  });
+
+To check the response use the optional 'expectedStatusCode' parameter for a specific route. If the status code of the response is wrong, the benchmarks will terminate and an appropriate error will be fired.
+	
+	var apiBenchmark = require('api-benchmark');
+	
+	var services = { 
+		server1: "http://myserver:myport/mypath",
+		server2: "http://myserver2:myport2/mypath2",
+	};
+
+	var routes = {
+		route1: {
+			route: '/not-existing-route',
+			method: 'get',
+			expectedStatusCode: 200
+		}
+	};
+
+	apiBenchmark.compare(services, routes, function(err, results){
+    console.log(err);
+    // displays 'Expected Status code was 200 but I got a 404 for server1/route1'
+  });
 
 ### Options
 

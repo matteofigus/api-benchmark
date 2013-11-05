@@ -10,22 +10,18 @@ describe('compare function', function(){
       'Fast server': "http://localhost:3007"
     };
 
-  it('should correctly raise exception if the endpoints parameter is not valid', function(done){
-    (function(){
-      apiBenchmark.compare(servers, null, function(results){
-
-      });
-    }).should.throw("Endpoints argument is not valid");
-    done();
+  it('should correctly return an error if the endpoints parameter is not valid', function(done){
+    apiBenchmark.compare(servers, null, function(err, results){
+      err.should.be.eql("Endpoints argument is not valid");
+      done();
+    });
   });
 
   it('should correctly raise exception if the services parameter is not valid', function(done){
-    (function(){
-      apiBenchmark.compare(null, endpoints, function(results){
-
-      });
-    }).should.throw("Services argument is not valid");
-    done();
+    apiBenchmark.compare(null, endpoints, function(err, results){
+      err.should.be.eql("Services argument is not valid");
+      done();
+    });
   });
 
   it('should correctly raise exception if the callback parameter is not valid', function(done){
