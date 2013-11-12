@@ -17,7 +17,7 @@ describe('compare function', function(){
     });
   });
 
-  it('should correctly raise exception if the services parameter is not valid', function(done){
+  it('should correctly return an error if the services parameter is not valid', function(done){
     apiBenchmark.compare(null, endpoints, function(err, results){
       err.should.be.eql("Services argument is not valid");
       done();

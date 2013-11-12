@@ -71,4 +71,18 @@ describe('log function', function(){
     done();
   });
 
+  it('should correctly log nothing if it is not enabled', function(done) {
+
+    var fakeLogger = new FakeLogger(),
+        debugHelper = new DebugHelper('test', fakeLogger);
+
+    debugHelper.shutUp();
+
+    debugHelper.simpleLog("Message");
+    debugHelper.log("Message");
+    debugHelper.logComparisonResult("Message");
+
+    fakeLogger.logStack.length.should.be.eql(0);
+    done();
+  });
 });
