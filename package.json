@@ -14,7 +14,7 @@
   "keywords": ["benchmark", "api", "performance", "test", "load balancer", "deployment", "continuous delivery"],
   "main":"index",
   "engines": {
-    "node": ">=0.8.x",
+    "node": ">=0.6.x",
     "npm": ">=1.1.x"
   },
   "dependencies": {
