@@ -136,3 +136,81 @@ describe('onBenchResults function', function(){
     done();
   });
 });
+
+describe('logFinalComparisonResult function', function(){
+
+  var FakeLogger = function(){
+
+    this.logStack = [];
+
+    var self = this;
+
+    this.simpleLog = function(message){
+      self.log(message);
+    }
+
+    this.log = function(message){
+      self.logStack.push(message);
+    };
+
+  };
+
+  it('should correctly log the faster in case of comparison', function(done) {
+
+    var results = { 
+      'Slow server': { 
+        simpleRoute: { 
+          name: 'Slow server/simpleRoute',
+          stats: [],
+          cycles: 1,
+          hz: 4.831093764217758,
+          href: 'http://localhost:3006/getJson' 
+        },
+        isSlowest: true 
+      },
+      'Fast server': { 
+        simpleRoute: { 
+          name: 'Fast server/simpleRoute',
+          stats: [],
+          cycles: 4,
+          hz: 217.14933595635625,
+          href: 'http://localhost:3007/getJson' 
+        },
+        isFastest: true 
+      } 
+    };
+
+    var fakeLogger = new FakeLogger(),
+        suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, fakeLogger);
+
+    suites.logFinalComparisonResult(results);
+
+    fakeLogger.logStack[0].should.be.eql('Fastest Service is Fast server');
+    done();
+  });
+
+  it('should not log anything in case of a single service', function(done) {
+
+    var results = { 
+      'Slow server': { 
+        simpleRoute: { 
+          name: 'Slow server/simpleRoute',
+          stats: [],
+          cycles: 1,
+          hz: 4.831093764217758,
+          href: 'http://localhost:3006/getJson' 
+        },
+        isFastest: true 
+      }
+    };
+
+    var fakeLogger = new FakeLogger(),
+        suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, fakeLogger);
+
+    suites.logFinalComparisonResult(results);
+
+    fakeLogger.logStack.length.should.be.eql(0);
+    done();
+  });
+
+});

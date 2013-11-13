@@ -1,10 +1,6 @@
 var benchmarkjs = require('benchmark');
 var DebugHelper = require('./../../lib/debug-helper');
-var SuitesManager = require('./../../lib/suites-manager');
 var should = require('should');
-var testAgent = require('./../fixtures/test-agent');
-var testData = require('./../fixtures/test-data');
-var _ = require('underscore');
 
 var FakeLogger = function(){
 
@@ -23,7 +19,7 @@ describe('log function', function(){
   it('should correctly log simple messages', function(done) {
 
     var fakeLogger = new FakeLogger(),
-        debugHelper = new DebugHelper('test', fakeLogger);
+        debugHelper = new DebugHelper(fakeLogger);
 
     debugHelper.simpleLog("Message");
 
@@ -34,7 +30,7 @@ describe('log function', function(){
   it('should correctly log messages', function(done) {
 
     var fakeLogger = new FakeLogger(),
-        debugHelper = new DebugHelper('test', fakeLogger);
+        debugHelper = new DebugHelper(fakeLogger);
 
     debugHelper.log("Message");
 
@@ -48,9 +44,9 @@ describe('log function', function(){
   it('should correctly log comparison result in case of comparison', function(done) {
 
     var fakeLogger = new FakeLogger(),
-        debugHelper = new DebugHelper('compare', fakeLogger);
+        debugHelper = new DebugHelper(fakeLogger);
 
-    debugHelper.logComparisonResult("Message");
+    debugHelper.log("Message");
 
     fakeLogger.logStack[0].should.be.eql("======================================");
     fakeLogger.logStack[1].should.be.eql("Message");
@@ -59,28 +55,15 @@ describe('log function', function(){
     done();
   });
 
-  it('should correctly hide comparison result if it is not a comparison', function(done) {
-
-    var fakeLogger = new FakeLogger(),
-        debugHelper = new DebugHelper('measure', fakeLogger);
-
-    debugHelper.logComparisonResult("Message");
-
-    fakeLogger.logStack.length.should.be.eql(0);
-
-    done();
-  });
-
   it('should correctly log nothing if it is not enabled', function(done) {
 
     var fakeLogger = new FakeLogger(),
-        debugHelper = new DebugHelper('test', fakeLogger);
+        debugHelper = new DebugHelper(fakeLogger);
 
     debugHelper.shutUp();
 
     debugHelper.simpleLog("Message");
     debugHelper.log("Message");
-    debugHelper.logComparisonResult("Message");
 
     fakeLogger.logStack.length.should.be.eql(0);
     done();
