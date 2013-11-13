@@ -1,7 +1,7 @@
 api-benchmark
 =============
 [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark)
-[![NPM][https://nodei.co/npm/api-benchmark.png?downloads=true]][https://npmjs.org/package/api-benchmark]
+[![NPM](https://nodei.co/npm/api-benchmark.png?downloads=true)](https://npmjs.org/package/api-benchmark)
 
 A node.js tool that measures and compares performances of single and multiple apis using [BenchmarkJs](http://benchmarkjs.com/)
 
