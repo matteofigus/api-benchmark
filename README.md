@@ -7,6 +7,8 @@ A node.js tool that measures and compares performances of single and multiple ap
 
 To see an example of a request/response [look at this gist](https://gist.github.com/matteofigus/6651234)
 
+I you want to benchmark your api via [grunt](http://gruntjs.com/) take a look at [grunt-api-benchmark](https://github.com/matteofigus/grunt-api-benchmark).
+
 # Installation
 
   npm install api-benchmark
