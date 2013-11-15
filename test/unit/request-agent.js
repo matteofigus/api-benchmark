@@ -1,13 +1,13 @@
-var RequestHandler = require('./../../lib/request-handler');
+var RequestAgent = require('./../../lib/request-agent');
 var should = require('should');
 var testAgent = require('./../fixtures/test-agent');
 
-describe('requestHandler.make function', function(){
+describe('requestAgent.make function', function(){
 
-  var requestHandler = new RequestHandler(new testAgent.FakeAgent());
+  var requestAgent = new RequestAgent(new testAgent.FakeAgent());
 
   it('should correctly handle null data', function(done){
-      requestHandler.make({ 
+      requestAgent.make({ 
         route: '/post',
         method: 'post',
         data: null
@@ -18,7 +18,7 @@ describe('requestHandler.make function', function(){
   });
 
   it('should correctly handle undefined data', function(done){
-      requestHandler.make({ 
+      requestAgent.make({ 
         route: '/post',
         method: 'post',
         data: undefined
@@ -29,7 +29,7 @@ describe('requestHandler.make function', function(){
   });
 
   it('should correctly handle cookies', function(done){
-      requestHandler.make({ 
+      requestAgent.make({ 
         route: '/get',
         method: 'get',
         headers: {
@@ -42,7 +42,7 @@ describe('requestHandler.make function', function(){
   });
 
   it('should correctly handle headers', function(done){
-      requestHandler.make({ 
+      requestAgent.make({ 
         route: '/get',
         method: 'get',
         headers: {
