@@ -49,6 +49,13 @@ describe('measure function', function(){
     });
   });
 
+  it('should correctly perform the minimum number of samples if the optional parameter is specified', function(done) {
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute}, { minSamples: 10 }, function(err, results){
+      results['My api'].simpleRoute.stats.sample.length.should.be.above(9);
+      done();
+    });
+  });
+
   it('should correctly display hrefs for each result', function(done) {
     apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(err, results){
       results['My api'].simpleRoute.href.should.be.eql("http://localhost:3006/getJson");
@@ -74,5 +81,26 @@ describe('measure function', function(){
       done();
     });
 
+  });
+
+  it('should work without the optional options parameter', function(done) {
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, function(err, results){
+      results['My api'].should.not.be.eql(null);
+      done();
+    });
+  });
+
+  it('should correctly handle post routes', function(done) {
+    apiBenchmark.measure(serversToBenchmark, { postRoute: endpoints.postRoute }, function(err, results){
+      results['My api'].postRoute.should.not.be.eql(null);
+      done();
+    });
+  });
+
+  it('should correctly handle delete routes', function(done) {
+    apiBenchmark.measure(serversToBenchmark, { deleteRoute: endpoints.deleteRoute }, function(err, results){
+      results['My api'].deleteRoute.should.not.be.eql(null);
+      done();
+    });
   });
 });

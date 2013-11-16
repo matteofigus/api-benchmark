@@ -48,31 +48,11 @@ describe('compare function', function(){
     });
   });
 
-  it('should work without the optional options parameter', function(done) {
-    apiBenchmark.compare(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, function(err, results){
-      results['Fast server'].isFastest.should.be.eql(true);
-      done();
-    });
-  });
-
   it('should correctly compare multiple routes', function(done) {
     apiBenchmark.compare(serversToBenchmark, { simpleRoute: endpoints.simpleRoute, secondaryRoute: endpoints.secondaryRoute }, function(err, results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });
   });
-
-  it('should correctly handle post routes', function(done) {
-    apiBenchmark.compare(serversToBenchmark, { postRoute: endpoints.postRoute }, function(err, results){
-      results['Fast server'].isFastest.should.be.eql(true);
-      done();
-    });
-  });
-
-  it('should correctly handle delete routes', function(done) {
-    apiBenchmark.compare(serversToBenchmark, { deleteRoute: endpoints.deleteRoute }, function(err, results){
-      results['Fast server'].isFastest.should.be.eql(true);
-      done();
-    });
-  });
+  
 });
