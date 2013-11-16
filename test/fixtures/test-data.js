@@ -7,7 +7,6 @@ var testData = {
       var average = {
         name: server,
         stats: { moe: nVal, rme: nVal, deviation: nVal, variance: nVal, mean: nVal, sem: nVal},
-        cycles: nVal,
         hz: nVal        
       }
       averages.push(average);
@@ -23,7 +22,6 @@ var testData = {
       results[route] = {
         name: serverName + "/" + route,
         stats: { moe: nVal, rme: nVal, deviation: nVal, variance: nVal, mean: nVal, sem: nVal},
-        cycles: nVal,
         hz: nVal
       };
     }

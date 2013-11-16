@@ -23,17 +23,6 @@ describe('sort function', function(){
 
 describe('getSuccessful function', function(){
 
-  it('should correctly filter results with 0 cycles', function(done) {
-
-    var testAveragesArray = testData.getAveragesArray({ 
-      server1: { numericValues: 0 }, 
-      server2: { numericValues: null }
-    });
-    
-    benchmarkUtils.getSuccessful(testAveragesArray).length.should.be.eql(0);
-    done();
-  });
-
   it('should correctly filter results with infinite hz', function(done) {
 
     var testAveragesArray = testData.getAveragesArray({ 
@@ -60,7 +49,6 @@ describe('getBenchmarkAverage function', function(){
     average.should.be.eql({
       name: "serverName",
       stats: { moe: 2, rme: 2, deviation: 2, variance: 2, mean: 2, sem: 2 },
-      cycles: 2,
       hz: 2
     });
 
@@ -82,7 +70,6 @@ describe('geAverage function', function(){
     sortedAverages[0].should.be.eql({
       name: "serverName1",
       stats: { moe: 2, rme: 2, deviation: 2, variance: 2, mean: 2, sem: 2 },
-      cycles: 2,
       hz: 2
     });
 
