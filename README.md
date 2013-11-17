@@ -11,7 +11,9 @@ I you want to benchmark your api via [grunt](http://gruntjs.com/) take a look at
 
 # Installation
 
+```shell
   npm install api-benchmark
+```
 
 # Usage
 
@@ -137,7 +139,9 @@ apiBenchmark.compare(services, routes, function(err, results){
 
 # Tests
 
+```shell
   npm test
+```
 
 # License
 
