@@ -16,8 +16,8 @@ describe('addEndpoints function', function(){
 
     suites.addEndpoints({ routeName: { route: '/route', method: 'get', headers: { 'name': 'value' } }});
 
-    _.find(suites.suites, function(suite){ 
-      return suite.name == 'routeName'
+    _.find(suites.routes, function(route){ 
+      return route.name == 'routeName'
     }).endpoint.headers.should.be.eql({ name: 'value'});
     
     done();
