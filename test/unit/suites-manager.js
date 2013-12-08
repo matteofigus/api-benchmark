@@ -49,7 +49,6 @@ describe('logFinalComparisonResult function', function(){
         simpleRoute: { 
           name: 'Slow server/simpleRoute',
           stats: [],
-          cycles: 1,
           hz: 4.831093764217758,
           href: 'http://localhost:3006/getJson' 
         },
@@ -59,7 +58,6 @@ describe('logFinalComparisonResult function', function(){
         simpleRoute: { 
           name: 'Fast server/simpleRoute',
           stats: [],
-          cycles: 4,
           hz: 217.14933595635625,
           href: 'http://localhost:3007/getJson' 
         },
@@ -83,7 +81,6 @@ describe('logFinalComparisonResult function', function(){
         simpleRoute: { 
           name: 'Slow server/simpleRoute',
           stats: [],
-          cycles: 1,
           hz: 4.831093764217758,
           href: 'http://localhost:3006/getJson' 
         },

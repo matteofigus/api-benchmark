@@ -43,7 +43,7 @@ describe('measure function', function(){
   });
 
   it('should correctly measure the performances of the service', function(done) {
-    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute, postRoute: endpoints.postRoute }, { maxTime: 0.5 }, function(err, results){
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute, postRoute: endpoints.postRoute }, function(err, results){
       results['My api'].should.not.be.eql(null);
       done();
     });
@@ -57,7 +57,7 @@ describe('measure function', function(){
   });
 
   it('should correctly display hrefs for each result', function(done) {
-    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, { maxTime: 0.5 }, function(err, results){
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, function(err, results){
       results['My api'].simpleRoute.href.should.be.eql("http://localhost:3006/getJson");
       done();
     });
