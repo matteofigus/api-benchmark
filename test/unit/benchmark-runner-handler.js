@@ -18,7 +18,7 @@ describe('BenchmarkRunnerHandler class', function(){
     
     emitStack = {};
 
-    var benchmarkRunnerHandler = new BenchmarkRunnerHandler(fakeBenchmarkRunner);
+    var benchmarkRunnerHandler = new BenchmarkRunnerHandler(fakeBenchmarkRunner, {});
     benchmarkRunnerHandler.emitError('the error details');
     emitStack['error'][0].should.be.eql('the error details');
     
