@@ -1,4 +1,3 @@
-var benchmarkjs = require('benchmark');
 var DebugHelper = require('./../../lib/debug-helper');
 var should = require('should');
 
