@@ -18,9 +18,9 @@
     "npm": ">=1.1.x"
   },
   "dependencies": {
-    "benchmark": "1.0.0",
     "superagent": "0.15.7",
-    "underscore": "1.5.2"
+    "underscore": "1.5.2",
+    "give-me": "0.0.12"
   },
   "devDependencies": {
     "should": "",

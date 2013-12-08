@@ -12,7 +12,7 @@ describe('addEndpoints function', function(){
 
   it('should correctly handle headers for specific endpoints', function(done) {
 
-    var suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, debugHelper);
+    var suites = new SuitesManager(fakeAgent, debugHelper);
 
     suites.addEndpoints({ routeName: { route: '/route', method: 'get', headers: { 'name': 'value' } }});
 
@@ -68,7 +68,7 @@ describe('logFinalComparisonResult function', function(){
     };
 
     var fakeLogger = new FakeLogger(),
-        suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, fakeLogger);
+        suites = new SuitesManager(fakeAgent, fakeLogger);
 
     suites.logFinalComparisonResult(results);
 
@@ -92,7 +92,7 @@ describe('logFinalComparisonResult function', function(){
     };
 
     var fakeLogger = new FakeLogger(),
-        suites = new SuitesManager(testData.getFakeBenchmarkObject(), fakeAgent, fakeLogger);
+        suites = new SuitesManager(fakeAgent, fakeLogger);
 
     suites.logFinalComparisonResult(results);
 
