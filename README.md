@@ -134,9 +134,6 @@ apiBenchmark.compare(services, routes, function(err, results){
 #### minSamples
   (Number): The minimum sample size required to perform statistical analysis.
 
-#### minTime
-  (Number): The time needed to reduce the percent uncertainty of measurement to 1% (secs).
-
 # Tests
 
 ```shell
