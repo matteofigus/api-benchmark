@@ -124,9 +124,6 @@ apiBenchmark.compare(services, routes, function(err, results){
 #### delay
   (Number): The delay between test cycles (secs)
 
-#### initCount
-  (Number): The default number of times to execute a test on a benchmark's first cycle.
-
 #### maxTime
   (Number): The maximum time a benchmark is allowed to run before finishing (secs).
   Note: Cycle delays aren't counted toward the maximum time.
