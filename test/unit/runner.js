@@ -65,3 +65,30 @@ describe('Runner.run in sequence', function(){
     runner.run();
   });
 });
+
+describe('Runner.run in parallel', function(){
+
+  it('should be able to run a series of 100 benchmarks in parallel in a decent amount of time', function(done){
+
+    var options = sanitise.options({ minSamples: 100, runMode: 'parallel' }),
+        runner = new Runner(options),
+        timer = new Timer();
+
+    runner.add('step', 'http://www.google.com', function(callback){
+      setTimeout(function() {
+        callback();
+      }, 10);
+    });
+
+    runner.on('complete', function(results){
+      timer.stop();
+      results[0].stats.sample.length.should.be.eql(100);
+      timer.time.should.be.within(0.01, 1);
+      done();
+    });
+
+    timer.start();
+    runner.run();
+  });
+});
+
