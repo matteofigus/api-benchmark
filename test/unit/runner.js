@@ -57,7 +57,7 @@ describe('Runner.run in sequence', function(){
     runner.on('complete', function(results){
       timer.stop();
       results[0].stats.sample.length.should.be.within(9,11);
-      timer.time.should.be.within(0.185, 0.215);
+      timer.time.should.be.within(0.185, 0.3);
       done();
     });
 
