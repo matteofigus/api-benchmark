@@ -92,3 +92,28 @@ describe('Runner.run in parallel', function(){
   });
 });
 
+describe('Runner.run in parallel', function(){
+
+  it('should be able to run a series of 500 benchmarks in parallel with a maxConcurrentRequests parameter', function(done){
+
+    var options = sanitise.options({ minSamples: 500, maxConcurrentRequests: 50, runMode: 'parallel' }),
+        runner = new Runner(options),
+        timer = new Timer();
+
+    runner.add('step', 'http://www.google.com', function(callback){
+      setTimeout(function() {
+        callback();
+      }, 10);
+    });
+
+    runner.on('complete', function(results){
+      timer.stop();
+      results[0].stats.sample.length.should.be.eql(500);
+      timer.time.should.be.within(0.1, 1);
+      done();
+    });
+
+    timer.start();
+    runner.run();
+  });
+});

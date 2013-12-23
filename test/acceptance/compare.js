@@ -5,7 +5,7 @@ var TestServers = require('http-test-servers');
 describe('compare function', function(){
 
   var testServers,
-      servers = { "Slow server": { port: 3006, delay: 200 }, 
+      servers = { "Slow server": { port: 3006, delay: 20 }, 
                   "Fast server": { port: 3007, delay: 0 }};
 
   var serversToBenchmark = { "Slow server": "http://localhost:3006",
