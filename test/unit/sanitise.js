@@ -41,6 +41,10 @@ describe('sanitise.options', function(){
     var sanitised = sanitise.options(null);
     sanitised.should.be.type('object');
     sanitised.delay.should.be.eql(0);
+    sanitised.runMode.should.be.eql('sequence');
+    sanitised.maxConcurrentRequests.should.be.eql(100);
+    sanitised.minSamples.should.be.eql(20);
+    sanitised.maxTime.should.be.eql(10);
     done();
   });
 });
