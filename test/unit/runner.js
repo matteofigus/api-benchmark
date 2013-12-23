@@ -2,6 +2,7 @@ var Runner = require('./../../lib/runner');
 var sanitise = require('./../../lib/sanitise');
 var should = require('should');
 var Timer = require('./../../lib/timer');
+var _ = require('underscore');
 
 describe('Runner.run in sequence', function(){
 
@@ -58,7 +59,7 @@ describe('Runner.run in sequence', function(){
     runner.on('complete', function(results){
       timer.stop();
       results[0].stats.sample.length.should.be.below(12);
-      timer.time.should.be.within(0.19, 0.3);
+      timer.time.should.be.within(0.18, 0.3);
       done();
     });
 
@@ -195,7 +196,7 @@ describe('Runner.addResult', function(){
     var newStep = runner.addResult(step);
 
     runner.results[0].name.should.be.eql('name');
-    should(runner.results[0].notRelevant).be.eql(undefined);
+    should(_.has(runner.results[0], 'notRelevant')).be.eql(false);
     done();
   });
 });
