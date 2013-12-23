@@ -40,7 +40,7 @@ describe('requestHandler.make function', function(){
 
     var fakeAgent = {
       make: function(req, callback){
-        callback({ status: 200 });
+        callback(null, { status: 200 });
       }
     };
 

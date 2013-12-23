@@ -54,5 +54,4 @@ describe('compare function', function(){
       done();
     });
   });
-  
 });

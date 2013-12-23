@@ -56,6 +56,17 @@ describe('measure function', function(){
     });
   });
 
+  it('should correctly perform parallel requests to the service with runMode=Parallel', function(done) {
+
+    var parallelRequests = 50;
+
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, { runMode: 'parallel', minSamples: parallelRequests }, function(err, results){
+      results['My api'].should.not.be.eql(null);
+      results['My api'].simpleRoute.stats.sample.length.should.be.eql(parallelRequests);
+      done();
+    });
+  });
+
   it('should correctly display hrefs for each result', function(done) {
     apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, function(err, results){
       results['My api'].simpleRoute.href.should.be.eql("http://localhost:3006/getJson");

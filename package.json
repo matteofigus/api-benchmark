@@ -33,7 +33,7 @@
   "devDependencies": {
     "should": "",
     "mocha": "",
-    "http-test-servers": "0.0.6"
+    "http-test-servers": "0.0.7"
   },
   "scripts": {
     "test": "node test/index"

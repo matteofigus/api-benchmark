@@ -11,7 +11,7 @@ describe('requestAgent.make function', function(){
         route: '/post',
         method: 'post',
         data: null
-      }, function(fakeResults){
+      }, function(err, fakeResults){
         fakeResults.data.should.be.eql({});
         done();
       });
@@ -22,7 +22,7 @@ describe('requestAgent.make function', function(){
         route: '/post',
         method: 'post',
         data: undefined
-      }, function(fakeResults){
+      }, function(err, fakeResults){
         fakeResults.data.should.be.eql({});
         done();
       });
@@ -35,7 +35,7 @@ describe('requestAgent.make function', function(){
         headers: {
           'Cookie': 'hello=world'
         }
-      }, function(fakeResults){
+      }, function(err, fakeResults){
         fakeResults.headers.should.be.eql({ Cookie: 'hello=world'});
         done();
       });
@@ -49,7 +49,7 @@ describe('requestAgent.make function', function(){
           'Cookie': 'cookieName=value',
           'Accept': 'application/json'
         }
-      }, function(fakeResults){
+      }, function(err, fakeResults){
         fakeResults.headers.Accept.should.be.eql('application/json');
         fakeResults.headers.Cookie.should.be.eql('cookieName=value');
         done();

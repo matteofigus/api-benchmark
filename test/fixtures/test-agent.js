@@ -1,7 +1,7 @@
 module.exports.FakeAgent = function(){ 
 
   this.end = function(callback){
-    callback({
+    callback(null, {
       data: this.data,
       headers: this.headers
     });
