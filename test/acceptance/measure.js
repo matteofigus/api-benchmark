@@ -49,14 +49,14 @@ describe('measure function', function(){
     });
   });
 
-  it('should correctly perform the minimum number of samples if the optional parameter is specified', function(done) {
-    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute}, { minSamples: 10, maxTime: 10, runMode: 'sequence' }, function(err, results){
-      results['My api'].simpleRoute.stats.sample.length.should.be.above(9);
+  it('should correctly perform the minimum number of samples if we set minSamples and maxTime in runMode=sequence', function(done) {
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute}, { minSamples: 15, maxTime: 10, runMode: 'sequence' }, function(err, results){
+      results['My api'].simpleRoute.stats.sample.length.should.be.eql(15);
       done();
     });
   });
 
-  it('should correctly perform parallel requests to the service with runMode=Parallel', function(done) {
+  it('should correctly perform parallel requests to the service with runMode=parallel', function(done) {
 
     var parallelRequests = 50;
 

@@ -36,14 +36,14 @@ describe('Runner.run in sequence', function(){
     });
 
     runner.on('complete', function(results){
-      results[0].stats.sample.length.should.be.below(11);
+      results[0].stats.sample.length.should.be.below(12);
       done();
     });
 
     runner.run();
   });
 
-  it('should be able to run a series of benchmarks with a delay time if needed, without and the maxTime calculation should ignore delays', function(done){
+  it('should be able to run a series of benchmarks with a delay time if needed, and the maxTime calculation should ignore delays', function(done){
 
     var options = sanitise.options({ minSamples: 50, runMode: 'sequence', delay: 10, maxTime: 0.1 }),
         runner = new Runner(options),
@@ -57,8 +57,8 @@ describe('Runner.run in sequence', function(){
 
     runner.on('complete', function(results){
       timer.stop();
-      results[0].stats.sample.length.should.be.within(9,11);
-      timer.time.should.be.within(0.185, 0.3);
+      results[0].stats.sample.length.should.be.below(12);
+      timer.time.should.be.within(0.19, 0.3);
       done();
     });
 
