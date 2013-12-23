@@ -195,7 +195,7 @@ describe('Runner.addResult', function(){
     var newStep = runner.addResult(step);
 
     runner.results[0].name.should.be.eql('name');
-    should(runner.results[0].notRelevant).be.undefined;
+    should(runner.results[0].notRelevant).be.eql(undefined);
     done();
   });
 });
