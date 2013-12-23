@@ -1,6 +1,5 @@
 var Runner = require('./../../lib/runner');
 var sanitise = require('./../../lib/sanitise');
-var should = require('should');
 var Timer = require('./../../lib/timer');
 var _ = require('underscore');
 
@@ -196,7 +195,7 @@ describe('Runner.addResult', function(){
     var newStep = runner.addResult(step);
 
     runner.results[0].name.should.be.eql('name');
-    should(_.has(runner.results[0], 'notRelevant')).be.eql(false);
+    _.has(runner.results[0], 'notRelevant').should.be.eql(false);
     done();
   });
 });
