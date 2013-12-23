@@ -50,7 +50,7 @@ describe('measure function', function(){
   });
 
   it('should correctly perform the minimum number of samples if the optional parameter is specified', function(done) {
-    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute}, { minSamples: 10 }, function(err, results){
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute}, { minSamples: 10, maxTime: 10, runMode: 'sequence' }, function(err, results){
       results['My api'].simpleRoute.stats.sample.length.should.be.above(9);
       done();
     });
