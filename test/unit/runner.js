@@ -1,5 +1,6 @@
 var Runner = require('./../../lib/runner');
 var sanitise = require('./../../lib/sanitise');
+var should = require('should');
 var Timer = require('./../../lib/timer');
 
 describe('Runner.run in sequence', function(){
@@ -117,8 +118,7 @@ describe('Runner.run in parallel', function(){
   it('should be able to run a series of benchmarks in parallel with a maxConcurrentRequests parameter in a maxTime', function(done){
 
     var options = sanitise.options({ minSamples: 1000, maxConcurrentRequests: 50, maxTime: 0.15, runMode: 'parallel' }),
-        runner = new Runner(options),
-        timer = new Timer();
+        runner = new Runner(options);
 
     runner.add('step', 'http://www.google.com', function(callback){
       setTimeout(function() {
@@ -127,12 +127,35 @@ describe('Runner.run in parallel', function(){
     });
 
     runner.on('complete', function(results){
-      timer.stop();
       results[0].stats.sample.length.should.be.within(50, 100);
       done();
     });
 
-    timer.start();
+    runner.run();
+  });
+
+  it('should be able to write benchmark times in the same order they have been called', function(done){
+
+    var options = sanitise.options({ minSamples: 5, maxConcurrentRequests: 50, maxTime: 0.50, runMode: 'parallel' }),
+        runner = new Runner(options);
+
+    var results = [10, 30, 50, 30, 10];
+
+    runner.add('step', 'http://www.google.com', function(callback){
+      setTimeout(function() {
+        callback();
+      }, results.pop());
+    });
+
+    runner.on('complete', function(results){
+      var samples = results[0].stats.sample;
+      samples[0].should.be.below(samples[1]);
+      samples[1].should.be.below(samples[2]);
+      samples[2].should.be.above(samples[3]);
+      samples[3].should.be.above(samples[4]);
+      done();
+    });
+
     runner.run();
   });
 });
