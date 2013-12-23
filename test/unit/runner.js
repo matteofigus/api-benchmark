@@ -159,3 +159,43 @@ describe('Runner.run in parallel', function(){
     runner.run();
   });
 });
+
+describe('Runner.addResult', function(){
+  it('should remove null values from step.stats', function(done){
+    var runner = new Runner();
+    var step = {
+      name: 'name',
+      href: 'href',
+      stats: {
+        sample: []
+      }
+    };
+
+    step.stats.sample.push(123);
+    step.stats.sample[3] = 456;
+    step.stats.sample[5] = 0;
+
+    var newStep = runner.addResult(step);
+
+    newStep.stats.sample.length.should.be.eql(2);
+    newStep.stats.sample[0].should.be.eql(123);
+    newStep.stats.sample[1].should.be.eql(456);
+    done();
+  });
+
+  it('should clean the step object from not relevant properties and add it to results', function(done){
+    var runner = new Runner();
+    var step = {
+      name: 'name',
+      'notRelevant': 'someValue',
+      'stats': {},
+      href: 'hello'
+    };
+
+    var newStep = runner.addResult(step);
+
+    runner.results[0].name.should.be.eql('name');
+    should(runner.results[0].notRelevant).be.undefined;
+    done();
+  });
+});
