@@ -119,17 +119,23 @@ apiBenchmark.compare(services, routes, function(err, results){
 ### Options
 
 #### debug
-  (Boolean): Displays some info on the console
+  (Boolean, default false): Displays some info on the console.
+
+#### runMode
+  (String, default 'sequence'): Can be 'sequence' (each request is made after receiving the previous response) or 'parallel' (all requests are made in parallel).
+
+#### maxConcurrentRequests
+  (Number, default 100): When in runMode='parallel' it is the maximum number of concurrent requests are made.
 
 #### delay
-  (Number): The delay between test cycles (secs)
+  (Number, default 0): When in runMode='sequence', it is the delay between test cycles (secs).
 
 #### maxTime
-  (Number): The maximum time a benchmark is allowed to run before finishing (secs).
+  (Number, default 10): The maximum time a benchmark is allowed to run before finishing (secs).
   Note: Cycle delays aren't counted toward the maximum time.
 
 #### minSamples
-  (Number): The minimum sample size required to perform statistical analysis.
+  (Number, default 20): The minimum sample size required to perform statistical analysis.
 
 # Tests
 
