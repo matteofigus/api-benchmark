@@ -177,9 +177,10 @@ describe('Runner.addResult', function(){
 
     var newStep = runner.addResult(step);
 
-    newStep.stats.sample.length.should.be.eql(2);
+    newStep.stats.sample.length.should.be.eql(3);
     newStep.stats.sample[0].should.be.eql(123);
     newStep.stats.sample[1].should.be.eql(456);
+    newStep.stats.sample[2].should.be.eql(0);
     done();
   });
 
