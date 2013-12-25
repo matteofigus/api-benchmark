@@ -36,7 +36,7 @@ describe('requestHandler.setup function', function(){
 
 describe('requestHandler.make function', function(){
 
-  it('should respond with an error in case of wrong response code', function(done){
+  it('should respond with a httpStatusCodeNotMatching error in case of wrong response code', function(done){
 
     var fakeAgent = {
       make: function(req, callback){
@@ -46,9 +46,31 @@ describe('requestHandler.make function', function(){
 
     requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, "suiteName", fakeAgent, function(err, success){
       success.should.be.eql(false);
-      err.type.should.be.eql("httpStatusCodeNotMatching");
+      err.code.should.be.eql("httpStatusCodeNotMatching");
       done();
     });
-
   });
-})
+
+  it('should respond with a ECONNREFUSED error in case of connection error', function(done){
+
+    var fakeAgent = {
+      make: function(req, callback){
+        callback({ 
+          code: 'ECONNREFUSED',
+          message: 'connect ECONNREFUSED' 
+        }, null);
+      }
+    };
+
+    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, "suiteName", fakeAgent, function(err, success){
+      success.should.be.eql(false);
+      err.code.should.be.eql("ECONNREFUSED");
+      done();
+    });
+  });
+
+});
+
+
+
+

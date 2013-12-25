@@ -2,7 +2,7 @@ var benchmarkUtils = require('./../../lib/benchmark-utils');
 var should = require('should');
 var testData = require('./../fixtures/test-data');
 
-describe('sort function', function(){
+describe('BenchmarkUtils.sort function', function(){
 
   it('should correctly sort multiple results by mean + moe', function(done) {
 
@@ -21,7 +21,7 @@ describe('sort function', function(){
   });
 });
 
-describe('getSuccessful function', function(){
+describe('BenchmarkUtils.getSuccessful function', function(){
 
   it('should correctly filter results with infinite hz', function(done) {
 
@@ -35,7 +35,7 @@ describe('getSuccessful function', function(){
   });
 });
 
-describe('getBenchmarkAverage function', function(){
+describe('BenchmarkUtils.getBenchmarkAverage function', function(){
 
   it('should correctly calculate the average of all the numeric values', function(done) {
 
@@ -56,7 +56,7 @@ describe('getBenchmarkAverage function', function(){
   });
 });
 
-describe('geAverage function', function(){
+describe('BenchmarkUtils.geAverage function', function(){
 
   it('should correctly calculate the average of all the numeric values for multiple server', function(done) {
 

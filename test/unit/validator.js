@@ -9,7 +9,7 @@ var servers = {
 };
 
 
-describe('checkEndpoints function', function(){
+describe('Validator.checkEndpoints function', function(){
 
   it('should correctly return an error if the endpoints parameter is null', function(done){
     var result = validator.checkEndpoints(null);
@@ -37,7 +37,7 @@ describe('checkEndpoints function', function(){
 
 });
 
-describe('checkServices function', function(){
+describe('Validator.checkServices function', function(){
 
   it('should correctly return an error if the services parameter is null', function(done){
     var result = validator.checkServices(null);    
@@ -59,7 +59,7 @@ describe('checkServices function', function(){
   
 });
 
-describe('checkCallback function', function(){
+describe('Validator.checkCallback function', function(){
 
   it('should correctly raise exception if the callback parameter is null', function(done){
     (function(){

@@ -45,6 +45,7 @@ describe('sanitise.options', function(){
     sanitised.maxConcurrentRequests.should.be.eql(100);
     sanitised.minSamples.should.be.eql(20);
     sanitised.maxTime.should.be.eql(10);
+    sanitised.stopOnError.should.be.eql(true);
     done();
   });
 });

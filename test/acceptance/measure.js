@@ -89,6 +89,29 @@ describe('measure function', function(){
 
     apiBenchmark.measure(serversToBenchmark, routesToBenchmark, function(err, results){
       err.should.be.eql("Expected Status code was 200 but I got a 403 for My api/errorRoute");
+      should.not.exist(results);
+      done();
+    });
+
+  });
+
+  it('should just collect the results including the errors in case of error and option stopOnError=false', function(done) {
+
+    var routesToBenchmark = {
+      simpleRoute: {
+        route: "/getJson",
+        expectedStatusCode: 200
+      },
+      errorRoute: {
+        route: "/errorRoute",
+        expectedStatusCode: 200
+      }
+    };
+
+    apiBenchmark.measure(serversToBenchmark, routesToBenchmark, { stopOnError: false }, function(err, results){
+      results['My api'].should.not.be.eql(null);
+      results['My api'].errorRoute.errors['httpStatusCodeNotMatching'].length.should.be.above(0);
+      err['My api'].errorRoute.should.be.eql(results['My api'].errorRoute.errors);
       done();
     });
 

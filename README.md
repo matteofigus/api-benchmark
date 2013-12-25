@@ -137,6 +137,9 @@ apiBenchmark.compare(services, routes, function(err, results){
 #### minSamples
   (Number, default 20): The minimum sample size required to perform statistical analysis.
 
+#### stopOnError
+  (Boolean, default true): Stops the benchmark as soon as it receives an error. When false, the benchmark goes on and the errors are collected inside the callback.
+  
 # Tests
 
 ```shell

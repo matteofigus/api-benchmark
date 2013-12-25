@@ -8,7 +8,7 @@ var _ = require('underscore');
 var fakeAgent = new testAgent.FakeAgent(),
     debugHelper = new DebugHelper();
 
-describe('addEndpoints function', function(){
+describe('SuitesManager.addEndpoints function', function(){
 
   it('should correctly handle headers for specific endpoints', function(done) {
 
@@ -24,7 +24,7 @@ describe('addEndpoints function', function(){
   });
 });
 
-describe('logFinalComparisonResult function', function(){
+describe('SuitesManager.logFinalComparisonResult function', function(){
 
   var FakeLogger = function(){
 
