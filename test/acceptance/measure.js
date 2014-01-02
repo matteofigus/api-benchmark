@@ -69,9 +69,10 @@ describe('measure function', function(){
     });
   });
 
-  it('should correctly display hrefs for each result', function(done) {
-    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, function(err, results){
+  it('should correctly display hrefs and concurrencyLevel for each result', function(done) {
+    apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, { runMode: 'parallel', maxConcurrentRequests: 10 }, function(err, results){
       results['My api'].simpleRoute.href.should.be.eql("http://localhost:3006/getJson");
+      results['My api'].simpleRoute.options.concurrencyLevel.should.be.eql(10);
       done();
     });
   });
