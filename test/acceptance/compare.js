@@ -8,8 +8,8 @@ describe('compare function', function(){
       servers = { "Slow server": { port: 3006, delay: 20 }, 
                   "Fast server": { port: 3007, delay: 0 }};
 
-  var serversToBenchmark = { "Slow server": "http://localhost:3006",
-                             "Fast server": "http://localhost:3007"};
+  var serversToBenchmark = { "Slow server": "http://localhost:3006/",
+                             "Fast server": "http://localhost:3007/"};
 
   var endpoints = { 
         simpleRoute: '/getJson', 

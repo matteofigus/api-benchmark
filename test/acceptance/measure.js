@@ -7,8 +7,8 @@ describe('measure function', function(){
   var testServers,
       server = { "My api": { port: 3006, delay: 0 },
                  "My slow api": { port: 3007, delay: 100 }},
-      serversToBenchmark = { "My api": "http://localhost:3006"},
-      slowServersToBenchmark = { "My api": "http://localhost:3007"},
+      serversToBenchmark = { "My api": "http://localhost:3006/"},
+      slowServersToBenchmark = { "My api": "http://localhost:3007/"},
       endpoints = { 
         simpleRoute: '/getJson', 
         secondaryRoute: '/getJson2',

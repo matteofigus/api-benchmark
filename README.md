@@ -25,10 +25,10 @@ Measures performances of a given api for multiple routes
 var apiBenchmark = require('api-benchmark');
 
 var service = { 
-  server1: "http://myserver:myport/mypath"
+  server1: "http://myserver:myport/mypath/"
 };
 
-var routes = { route1: '/route1', route2: '/route2' };
+var routes = { route1: 'route1', route2: 'route2' };
 
 apiBenchmark.measure(service, routes, function(err, results){
   console.log(results);
@@ -44,11 +44,11 @@ Compares performances of a given list of api servers with the same routes. Usefu
 var apiBenchmark = require('api-benchmark');
 
 var services = { 
-  server1: "http://myserver:myport/mypath",
-  server2: "http://myserver2:myport2/mypath2",
+  server1: "http://myserver:myport/mypath/",
+  server2: "http://myserver2:myport2/mypath2/",
 };
 
-var routes = { route1: '/route1', route2: '/route2' };
+var routes = { route1: 'route1', route2: 'route2' };
 
 apiBenchmark.compare(services, routes, function(err, results){
   console.log(results);
@@ -62,23 +62,23 @@ All the Http verbs and headers are supported.
 var apiBenchmark = require('api-benchmark');
 
 var services = { 
-  server1: "http://myserver:myport/mypath",
-  server2: "http://myserver2:myport2/mypath2",
+  server1: "http://myserver:myport/mypath/",
+  server2: "http://myserver2:myport2/mypath2/",
 };
 
 var routes = { 
   route1: {
     method: 'get',
-    route: '/getRoute',
+    route: 'getRoute',
     headers: {
           'Cookie': 'cookieName=value',
           'Accept': 'application/json'
     }
   },
-  route2: '/getRoute2',
+  route2: 'getRoute2',
   route3: { 
     method: 'post', 
-    route: '/postRoute', 
+    route: 'postRoute', 
     data: { 
       test: true, 
       moreData: 'aString' 
