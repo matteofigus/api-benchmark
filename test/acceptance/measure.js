@@ -5,8 +5,10 @@ var TestServers = require('http-test-servers');
 describe('measure function', function(){
 
   var testServers,
-      server = { "My api": { port: 3006, delay: 0 }},
+      server = { "My api": { port: 3006, delay: 0 },
+                 "My slow api": { port: 3007, delay: 100 }},
       serversToBenchmark = { "My api": "http://localhost:3006"},
+      slowServersToBenchmark = { "My api": "http://localhost:3007"},
       endpoints = { 
         simpleRoute: '/getJson', 
         secondaryRoute: '/getJson2',
@@ -74,7 +76,7 @@ describe('measure function', function(){
     });
   });
 
-  it('should correctly raise an exception if the optional StatusCode is specified and incorrect', function(done) {
+  it('should correctly raise an exception if the optional expectedStatusCode is specified and incorrect', function(done) {
 
     var routesToBenchmark = {
       simpleRoute: {
@@ -92,7 +94,22 @@ describe('measure function', function(){
       should.not.exist(results);
       done();
     });
+  });
 
+  it('should correctly raise an exception if the optional maxMean is specified and out of range', function(done) {
+
+    var routesToBenchmark = {
+      simpleRoute: {
+        route: "/getJson",
+        maxMean: 0.080
+      }
+    };
+
+    apiBenchmark.measure(slowServersToBenchmark, routesToBenchmark, function(err, results){
+      err.should.be.eql("Mean should be below 0.08 for My api/simpleRoute");
+      should.not.exist(results);
+      done();
+    });
   });
 
   it('should just collect the results including the errors in case of error and option stopOnError=false', function(done) {

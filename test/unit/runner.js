@@ -10,7 +10,7 @@ describe('Runner.run in sequence', function(){
     var options = sanitise.options({ minSamples: 5, runMode: 'sequence', maxTime: 10 }),
         runner = new Runner(options);
 
-    runner.add('step', 'http://www.google.com', function(callback){
+    runner.add('step', 'http://www.google.com', {}, function(callback){
       setTimeout(function() {
         callback();
       }, 10);
@@ -29,7 +29,7 @@ describe('Runner.run in sequence', function(){
     var options = sanitise.options({ minSamples: 500, runMode: 'sequence', maxTime: 0.1 }),
         runner = new Runner(options);
 
-    runner.add('step', 'http://www.google.com', function(callback){
+    runner.add('step', 'http://www.google.com', {}, function(callback){
       setTimeout(function() {
         callback();
       }, 10);
@@ -49,7 +49,7 @@ describe('Runner.run in sequence', function(){
         runner = new Runner(options),
         timer = new Timer();
 
-    runner.add('step', 'http://www.google.com', function(callback){
+    runner.add('step', 'http://www.google.com', {}, function(callback){
       setTimeout(function() {
         callback();
       }, 10);
@@ -75,7 +75,7 @@ describe('Runner.run in parallel', function(){
         runner = new Runner(options),
         timer = new Timer();
 
-    runner.add('step', 'http://www.google.com', function(callback){
+    runner.add('step', 'http://www.google.com', {}, function(callback){
       setTimeout(function() {
         callback();
       }, 10);
@@ -98,7 +98,7 @@ describe('Runner.run in parallel', function(){
         runner = new Runner(options),
         timer = new Timer();
 
-    runner.add('step', 'http://www.google.com', function(callback){
+    runner.add('step', 'http://www.google.com', {}, function(callback){
       setTimeout(function() {
         callback();
       }, 10);
@@ -120,7 +120,7 @@ describe('Runner.run in parallel', function(){
     var options = sanitise.options({ minSamples: 1000, maxConcurrentRequests: 50, maxTime: 0.15, runMode: 'parallel' }),
         runner = new Runner(options);
 
-    runner.add('step', 'http://www.google.com', function(callback){
+    runner.add('step', 'http://www.google.com', {}, function(callback){
       setTimeout(function() {
         callback();
       }, 100);
@@ -141,7 +141,7 @@ describe('Runner.run in parallel', function(){
 
     var results = [10, 30, 50, 30, 10];
 
-    runner.add('step', 'http://www.google.com', function(callback){
+    runner.add('step', 'http://www.google.com', {}, function(callback){
       setTimeout(function() {
         callback();
       }, results.pop());
@@ -168,7 +168,8 @@ describe('Runner.addResult', function(){
       href: 'href',
       stats: {
         sample: []
-      }
+      },
+      options: {}
     };
 
     step.stats.sample.push(123);
@@ -190,7 +191,8 @@ describe('Runner.addResult', function(){
       name: 'name',
       'notRelevant': 'someValue',
       'stats': {},
-      href: 'hello'
+      href: 'hello',
+      options: {}
     };
 
     var newStep = runner.addResult(step);

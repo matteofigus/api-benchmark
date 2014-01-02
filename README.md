@@ -92,31 +92,27 @@ apiBenchmark.compare(services, routes, function(err, results){
 });
 ```
 
-To check the response use the optional 'expectedStatusCode' parameter for a specific route. If the status code of the response is wrong, the benchmarks will terminate and an appropriate error will be fired.
+### Route object
 
-```js 
-var apiBenchmark = require('api-benchmark');
+#### method
+  (String, default 'get'): Http verb.
 
-var services = { 
-  server1: "http://myserver:myport/mypath",
-  server2: "http://myserver2:myport2/mypath2",
-};
+#### route
+  (String): the route to benchmark
 
-var routes = {
-  route1: {
-    route: '/not-existing-route',
-    method: 'get',
-    expectedStatusCode: 200
-  }
-};
+#### headers
+  (Object): the headers to send
 
-apiBenchmark.compare(services, routes, function(err, results){
-  console.log(err);
-  // displays 'Expected Status code was 200 but I got a 404 for server1/route1'
-});
-```
+#### data
+  (Object): the data sent with the request
 
-### Options
+#### expectedStatusCode
+  (Number, default null): if it is a number, generates an error when the status code of the response is different
+
+#### maxMean
+  (Number, default null): if it is a number, generates an error when the mean value for a benchmark cycle is major than the expected value
+
+### Options object
 
 #### debug
   (Boolean, default false): Displays some info on the console.
