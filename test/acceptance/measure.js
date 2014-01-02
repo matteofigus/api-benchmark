@@ -105,7 +105,7 @@ describe('measure function', function(){
       }
     };
 
-    apiBenchmark.measure(slowServersToBenchmark, routesToBenchmark, function(err, results){
+    apiBenchmark.measure(slowServersToBenchmark, routesToBenchmark, { minSamples: 2 }, function(err, results){
       err.should.be.eql("Mean should be below 0.08 for My api/simpleRoute");
       should.not.exist(results);
       done();
