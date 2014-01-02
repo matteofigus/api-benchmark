@@ -49,7 +49,7 @@ describe('compare function', function(){
   });
 
   it('should correctly compare multiple routes', function(done) {
-    apiBenchmark.compare(serversToBenchmark, { simpleRoute: endpoints.simpleRoute, secondaryRoute: endpoints.secondaryRoute }, function(err, results){
+    apiBenchmark.compare(serversToBenchmark, { simpleRoute: endpoints.simpleRoute, secondaryRoute: endpoints.secondaryRoute }, { minSamples: 5 }, function(err, results){
       results['Fast server'].isFastest.should.be.eql(true);
       done();
     });

@@ -106,7 +106,7 @@ describe('measure function', function(){
     };
 
     apiBenchmark.measure(slowServersToBenchmark, routesToBenchmark, { minSamples: 2 }, function(err, results){
-      err.should.be.eql("Mean should be below 0.08 for My api/simpleRoute");
+      err.should.be.eql("Mean should be below 0.08");
       should.not.exist(results);
       done();
     });
@@ -117,7 +117,7 @@ describe('measure function', function(){
     var routesToBenchmark = {
       simpleRoute: {
         route: "/getJson",
-        expectedStatusCode: 200
+        maxMean: 0.08
       },
       errorRoute: {
         route: "/errorRoute",
@@ -125,9 +125,12 @@ describe('measure function', function(){
       }
     };
 
-    apiBenchmark.measure(serversToBenchmark, routesToBenchmark, { stopOnError: false }, function(err, results){
+    apiBenchmark.measure(slowServersToBenchmark, routesToBenchmark, { stopOnError: false, minSamples: 2 }, function(err, results){
       results['My api'].should.not.be.eql(null);
+      results['My api'].simpleRoute.errors['maxMeanExceeded'].length.should.be.above(0);
       results['My api'].errorRoute.errors['httpStatusCodeNotMatching'].length.should.be.above(0);
+
+      err['My api'].simpleRoute.should.be.eql(results['My api'].simpleRoute.errors);
       err['My api'].errorRoute.should.be.eql(results['My api'].errorRoute.errors);
       done();
     });

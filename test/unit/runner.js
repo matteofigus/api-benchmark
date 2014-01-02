@@ -192,13 +192,14 @@ describe('Runner.addResult', function(){
       'notRelevant': 'someValue',
       'stats': {},
       href: 'hello',
-      options: {}
+      options: { hello: 'world' }
     };
 
     var newStep = runner.addResult(step);
 
     runner.results[0].name.should.be.eql('name');
     _.has(runner.results[0], 'notRelevant').should.be.eql(false);
+    runner.results[0].options.should.be.eql({ hello: 'world'});
     done();
   });
 });
