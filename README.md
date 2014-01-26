@@ -112,6 +112,9 @@ apiBenchmark.compare(services, routes, function(err, results){
 #### maxMean
   (Number, default null): if it is a number, generates an error when the mean value for a benchmark cycle is major than the expected value
 
+#### maxSingleMean
+  (Number, default null): if it is a number, generates an error when the mean across all the concurrent requests value is major than the expected value
+
 ### Options object
 
 #### debug

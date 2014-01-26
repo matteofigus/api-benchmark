@@ -113,6 +113,22 @@ describe('measure function', function(){
     });
   });
 
+  it('should correctly raise an exception if the optional maxSingleMean is specified and out of range', function(done) {
+
+    var routesToBenchmark = {
+      simpleRoute: {
+        route: "/getJson",
+        maxSingleMean: 0.040
+      }
+    };
+
+    apiBenchmark.measure(slowServersToBenchmark, routesToBenchmark, { minSamples: 2, maxConcurrentRequests: 2, runMode: 'parallel' }, function(err, results){
+      err.should.be.eql("Mean across all concurrent requests should be below 0.04");
+      should.not.exist(results);
+      done();
+    });
+  });
+
   it('should just collect the results including the errors in case of error and option stopOnError=false', function(done) {
 
     var routesToBenchmark = {
