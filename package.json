@@ -1,6 +1,6 @@
 {
   "name": "api-benchmark",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "description": "A simple nodejs tool to measure and compare performances of api services",
   "author": "Matteo Figus <matteofigus@gmail.com>",
   "license": "MIT",
@@ -33,7 +33,7 @@
   "devDependencies": {
     "should": "",
     "mocha": "",
-    "http-test-servers": "0.0.7"
+    "http-test-servers": "0.0.9"
   },
   "scripts": {
     "test": "node test/index"
