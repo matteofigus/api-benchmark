@@ -1,13 +1,17 @@
-api-benchmark [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark)
+api-benchmark 
 =============
-
-[![NPM](https://nodei.co/npm/api-benchmark.png?downloads=true)](https://npmjs.org/package/api-benchmark)
 
 A node.js tool that measures and compares performances of single and multiple apis inspired by [BenchmarkJs](http://benchmarkjs.com/)
 
 To see an example of a request/response [look at this gist](https://gist.github.com/matteofigus/6651234)
 
 I you want to benchmark your api via [grunt](http://gruntjs.com/) take a look at [grunt-api-benchmark](https://github.com/matteofigus/grunt-api-benchmark).
+
+Node version: **0.8.0** required
+
+Build status: [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark)
+
+[![NPM](https://nodei.co/npm/api-benchmark.png?downloads=true)](https://npmjs.org/package/api-benchmark)
 
 # Installation
 
@@ -144,6 +148,19 @@ apiBenchmark.compare(services, routes, function(err, results){
 ```shell
 npm test
 ```
+
+# Contributing
+
+For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
+Feel free to open new Issues in case of Bugs or Feature requests. 
+Pull requests are welcome, possibly in new branches.
+
+### TODO
+
+* Command-line simple interface
+* Multi-thread requests
+* SOAP
+* Killer mode - [ask for details](https://twitter.com/matteofigus)
 
 # License
 
