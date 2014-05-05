@@ -75,8 +75,8 @@ var routes = {
     method: 'get',
     route: 'getRoute',
     headers: {
-          'Cookie': 'cookieName=value',
-          'Accept': 'application/json'
+      'Cookie': 'cookieName=value',
+      'Accept': 'application/json'
     }
   },
   route2: 'getRoute2',
@@ -105,10 +105,10 @@ apiBenchmark.compare(services, routes, function(err, results){
   (String): the route to benchmark
 
 #### headers
-  (Object): the headers to send
+  (Object): the headers to send. In case of function (that has to return an object) it will be evaulated for each request.
 
 #### data
-  (Object): the data sent with the request
+  (Object): the data sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
 
 #### expectedStatusCode
   (Number, default null): if it is a number, generates an error when the status code of the response is different
