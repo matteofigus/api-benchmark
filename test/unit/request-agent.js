@@ -4,7 +4,14 @@ var testAgent = require('./../fixtures/test-agent');
 
 describe('requestAgent.make function', function(){
 
-  var requestAgent = new RequestAgent(new testAgent.FakeAgent());
+  var requestAgent;
+
+  beforeEach(function(done){
+    var fakeAgent = new testAgent.FakeAgent();
+    requestAgent = new RequestAgent(fakeAgent);
+    fakeAgent.headers = {};
+    done();
+  });
 
   it('should correctly handle null data', function(done){
       requestAgent.make({ 
@@ -26,6 +33,30 @@ describe('requestAgent.make function', function(){
         fakeResults.data.should.be.eql({});
         done();
       });
+  });
+
+  it('should correctly handle data as a function', function(done){
+
+    var i = 0;
+
+    var dataFunc = function(){
+      i++;
+      return { c: i };
+    }
+
+    var request = { 
+      route: '/post',
+      method: 'post',
+      data: dataFunc
+    };
+
+    requestAgent.make(request, function(err, fakeResults){
+      fakeResults.data.should.be.eql({c: 1});
+      requestAgent.make(request, function(err, fakeResults){
+        fakeResults.data.should.be.eql({c: 2});
+        done();
+      });
+    });
   });
 
   it('should correctly handle cookies', function(done){
@@ -54,6 +85,30 @@ describe('requestAgent.make function', function(){
         fakeResults.headers.Cookie.should.be.eql('cookieName=value');
         done();
       });
+  });
+
+  it('should correctly handle headers as a function', function(done){
+
+    var i = 0;
+
+    var headersFunc = function(){
+      i++;
+      return { c: i };
+    }
+
+    var request = { 
+      route: '/get',
+      method: 'get',
+      headers: headersFunc
+    };
+
+    requestAgent.make(request, function(err, fakeResults){ 
+      fakeResults.headers.should.be.eql({c: 1});
+      requestAgent.make(request, function(err, fakeResults){
+        fakeResults.headers.should.be.eql({c: 2});
+        done();
+      });
+    });
   });
 
 });
