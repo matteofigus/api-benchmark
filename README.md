@@ -1,4 +1,4 @@
-api-benchmark 
+api-benchmark
 =============
 
 A node.js tool that measures and compares performances of single and multiple apis inspired by [BenchmarkJs](http://benchmarkjs.com/)
@@ -21,14 +21,14 @@ npm install api-benchmark
 
 # Usage
 
-### measure(service, routes, [options, ] callback)
+### measure(service, [routes](#route-object), [[options](#options-object), ] callback)
 
 Measures performances of a given api for multiple routes
 
 ```js
 var apiBenchmark = require('api-benchmark');
 
-var service = { 
+var service = {
   server1: "http://myserver:myport/mypath/"
 };
 
@@ -40,14 +40,14 @@ apiBenchmark.measure(service, routes, function(err, results){
 });
 ```
 
-### compare(services, routes, [options, ] callback)
+### compare(services, [routes](#route-object), [[options](#options-object), ] callback)
 
 Compares performances of a given list of api servers with the same routes. Useful in case of load balancers, globalised services, deployment of new versions.
 
 ```js
 var apiBenchmark = require('api-benchmark');
 
-var services = { 
+var services = {
   server1: "http://myserver:myport/mypath/",
   server2: "http://myserver2:myport2/mypath2/",
 };
@@ -65,12 +65,12 @@ All the Http verbs and headers are supported.
 ```js
 var apiBenchmark = require('api-benchmark');
 
-var services = { 
+var services = {
   server1: "http://myserver:myport/mypath/",
   server2: "http://myserver2:myport2/mypath2/",
 };
 
-var routes = { 
+var routes = {
   route1: {
     method: 'get',
     route: 'getRoute',
@@ -80,12 +80,12 @@ var routes = {
     }
   },
   route2: 'getRoute2',
-  route3: { 
-    method: 'post', 
-    route: 'postRoute', 
-    data: { 
-      test: true, 
-      moreData: 'aString' 
+  route3: {
+    method: 'post',
+    route: 'postRoute',
+    data: {
+      test: true,
+      moreData: 'aString'
     }
   }
 };
@@ -93,6 +93,25 @@ var routes = {
 apiBenchmark.compare(services, routes, function(err, results){
   console.log(results);
   // displays some stats, including the winner!
+});
+```
+
+### getHtml(results, callback)
+Given a results object, gets the html report.
+```js
+var apiBenchmark = require('api-benchmark');
+
+var service = {
+  server1: "http://myserver:myport/mypath/"
+};
+
+var routes = { route1: 'route1', route2: 'route2' };
+
+apiBenchmark.measure(service, routes, function(err, results){
+  apiBenchmarl.getHtml(results, function(error, html){
+    console.log(html);
+    // now save it yourself to a file and enjoy
+  });
 });
 ```
 
@@ -142,7 +161,7 @@ apiBenchmark.compare(services, routes, function(err, results){
 
 #### stopOnError
   (Boolean, default true): Stops the benchmark as soon as it receives an error. When false, the benchmark goes on and the errors are collected inside the callback.
-  
+
 # Tests
 
 ```shell
@@ -152,7 +171,7 @@ npm test
 # Contributing
 
 For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
-Feel free to open new Issues in case of Bugs or Feature requests. 
+Feel free to open new Issues in case of Bugs or Feature requests.
 Pull requests are welcome, possibly in new branches.
 
 ### TODO
