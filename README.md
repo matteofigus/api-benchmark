@@ -180,14 +180,14 @@ apiBenchmark.measure(service, routes, function(err, results){
 #### stopOnError
   (Boolean, default true): Stops the benchmark as soon as it receives an error. When false, the benchmark goes on and the errors are collected inside the callback.
 
+# Tuning
+You should tune your machine to remove any OS limits in terms of opening and quickly recycling sockets.
+
 # Contributing
 
 For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
 Feel free to open new Issues in case of Bugs or Feature requests.
 Pull requests are welcome, possibly in new branches.
-
-# Tuning
-You should tune your machine to remove any OS limits in terms of opening and quickly recycling sockets.
 
 ### Linux and Mac OS X
 ```sh
