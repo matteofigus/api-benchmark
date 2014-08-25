@@ -1,13 +1,31 @@
 api-benchmark
 =============
 
-A node.js tool that measures and compares performances of single and multiple apis inspired by [BenchmarkJs](http://benchmarkjs.com/)
+A node.js tool that measures and compares performances of single and multiple apis inspired by [BenchmarkJs](http://benchmarkjs.com/).
+[Why all of this?](http://tech.opentable.co.uk/blog/2014/02/28/api-benchmark/)
 
-To see an example of a request/response [look at this gist](https://gist.github.com/matteofigus/6651234)
+![https://raw.github.com/matteofigus/api-benchmark-www/master/public/images/screen-shot.png](https://raw.github.com/matteofigus/api-benchmark-www/master/public/images/screen-shot.png)
+
+To see an example of a request/response [look at this gist](https://gist.github.com/matteofigus/6651234).
 
 If you want to benchmark your api via [grunt](http://gruntjs.com/) take a look at [grunt-api-benchmark](https://github.com/matteofigus/grunt-api-benchmark).
 
-Node version: **0.8.0** required
+1. [Requirements](#requirements)
+1. [Installation](#installation)
+1. [Usage](#usage)
+  1. API
+    * [`measure`](#measureservice-routes-options--callback)
+    * [`compare`](#compareservices-routes-options--callback)
+    * [`getHtml`](#gethtmlresults-callback)
+  1. [The `Route` object](#route-object)
+  1. [The `Options` object](#options-object)
+1. [Contributing](#contributing)
+1. [Why all of this?](http://tech.opentable.co.uk/blog/2014/02/28/api-benchmark/)
+1. [Tuning your machine to benchmark](#tuning)
+
+# Requirements
+
+Node version: min: **0.8.0**, recommended: **>=0.10.13**
 
 Build status: [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark)
 
@@ -162,17 +180,28 @@ apiBenchmark.measure(service, routes, function(err, results){
 #### stopOnError
   (Boolean, default true): Stops the benchmark as soon as it receives an error. When false, the benchmark goes on and the errors are collected inside the callback.
 
-# Tests
-
-```shell
-npm test
-```
-
 # Contributing
 
 For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
 Feel free to open new Issues in case of Bugs or Feature requests.
 Pull requests are welcome, possibly in new branches.
+
+# Tuning
+You should tune your machine to remove any OS limits in terms of opening and quickly recycling sockets.
+
+### Linux and Mac OS X
+```sh
+sudo sysctl -w kern.maxfiles=25000
+sudo sysctl -w kern.maxfilesperproc=24500
+sudo sysctl -w kern.ipc.somaxconn=20000
+ulimit -S -n 20000
+```
+
+### Tests
+
+```shell
+npm test
+```
 
 ### TODO
 
@@ -184,5 +213,3 @@ Pull requests are welcome, possibly in new branches.
 # License
 
 MIT
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/matteofigus/api-benchmark/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
