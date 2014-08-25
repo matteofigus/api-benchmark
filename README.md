@@ -19,9 +19,9 @@ If you want to benchmark your api via [grunt](http://gruntjs.com/) take a look a
     * [`getHtml`](#gethtmlresults-callback)
   1. [The `Route` object](#route-object)
   1. [The `Options` object](#options-object)
+1. [Tuning your machine to benchmark](#tuning)
 1. [Contributing](#contributing)
 1. [Why all of this?](http://tech.opentable.co.uk/blog/2014/02/28/api-benchmark/)
-1. [Tuning your machine to benchmark](#tuning)
 
 # Requirements
 
