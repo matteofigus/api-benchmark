@@ -183,12 +183,6 @@ apiBenchmark.measure(service, routes, function(err, results){
 # Tuning
 You should tune your machine to remove any OS limits in terms of opening and quickly recycling sockets.
 
-# Contributing
-
-For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
-Feel free to open new Issues in case of Bugs or Feature requests.
-Pull requests are welcome, possibly in new branches.
-
 ### Linux and Mac OS X
 ```sh
 sudo sysctl -w kern.maxfiles=25000
@@ -196,6 +190,12 @@ sudo sysctl -w kern.maxfilesperproc=24500
 sudo sysctl -w kern.ipc.somaxconn=20000
 ulimit -S -n 20000
 ```
+
+# Contributing
+
+For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
+Feel free to open new Issues in case of Bugs or Feature requests.
+Pull requests are welcome, possibly in new branches.
 
 ### Tests
 
