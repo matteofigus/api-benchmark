@@ -48,7 +48,7 @@ describe('BenchmarkUtils.getBenchmarkAverage function', function(){
 
     average.should.be.eql({
       name: "serverName",
-      stats: { moe: 2, rme: 2, deviation: 2, variance: 2, mean: 2, sem: 2 },
+      stats: { moe: 2, rme: 2, deviation: 2, variance: 2, mean: 2, sem: 2, p75: 2, p95: 2, p99: 2, p999: 2 },
       hz: 2
     });
 
@@ -69,7 +69,7 @@ describe('BenchmarkUtils.geAverage function', function(){
 
     sortedAverages[0].should.be.eql({
       name: "serverName1",
-      stats: { moe: 2, rme: 2, deviation: 2, variance: 2, mean: 2, sem: 2 },
+      stats: { moe: 2, rme: 2, deviation: 2, variance: 2, mean: 2, sem: 2, p75: 2, p95: 2, p99: 2, p999: 2 },
       hz: 2
     });
 
