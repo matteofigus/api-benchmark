@@ -17,7 +17,7 @@ describe('requestHandler.setup function', function(){
         aProperty: "value"
       },
       runner: {
-        add: function(suiteName, suiteHref, suiteOptions,callback){
+        add: function(suiteName, suiteHref, suiteOptions, suiteRequest, callback){
           callback();
         }
       }

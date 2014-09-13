@@ -31,7 +31,7 @@
     "give-me": "0.0.15"
   },
   "devDependencies": {
-    "should": "",
+    "should": "3.3.2",
     "mocha": "",
     "http-test-servers": "0.0.11"
   },

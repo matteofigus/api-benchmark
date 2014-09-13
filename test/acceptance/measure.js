@@ -174,4 +174,48 @@ describe('measure function', function(){
       done();
     });
   });
+
+  it('should correctly save request headers', function(done){
+    
+    var routesToBenchmark = {
+      headersRoute: {
+        route: "/getJson",
+        maxSingleMean: 0.040,
+        headers: {
+          'Accept-language': '*'
+        }
+      }
+    };
+
+    apiBenchmark.measure(serversToBenchmark, routesToBenchmark, function(err, results){
+      results['My api'].headersRoute.request.headers['Accept-language'].should.be.eql('*');
+      done();
+    });
+  });
+
+  it('should correctly save request data', function(done){
+
+    apiBenchmark.measure(serversToBenchmark, { postRoute: endpoints.postRoute}, function(err, results){
+      results['My api'].postRoute.request.data.someData.should.be.eql('someStrings');
+      done();
+    });
+  });
+
+  it('should correctly save response headers after the first request', function(done){
+
+    apiBenchmark.measure(serversToBenchmark, { getRoute: endpoints.simpleRoute}, function(err, results){
+      results['My api'].getRoute.response.header.should.not.be.eql(null);
+      results['My api'].getRoute.response.header['content-type'].should.be.eql('application/json; charset=utf-8');
+      done();
+    });
+  });
+
+  it('should correctly save response body after the first request', function(done){
+
+    apiBenchmark.measure(serversToBenchmark, { getRoute: endpoints.simpleRoute }, function(err, results){
+      results['My api'].getRoute.response.body.should.not.be.eql(null);
+      results['My api'].getRoute.response.body.should.be.eql({ message: '/getJson' });
+      done();
+    });
+  });
 });
