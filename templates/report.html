@@ -8,7 +8,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.canvasTextRenderer.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.highlighter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/jquery.jqplot.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/dark.min.css" type="text/css" />
 
     <style type="text/css">
       .jqplot-target {
@@ -38,11 +41,35 @@
         text-align: center;
       }
 
+      .buttons {
+        width: 100%;
+        border-bottom: 1px solid rgb(75, 72, 72);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        text-align: right;
+      }
+
+      .button {
+        margin-right: 10px;
+        padding: 6px;
+        text-decoration: none;
+      }
+
+      .button.selected {
+        background-color: rgb(56, 56, 56);
+      }
+
       .chart {
         width: 60%;
         height: 450px;
         float: left;
       }
+
+      .panel {
+        height: 450px;
+        overflow-y: auto;
+      }
+
       .route {
         width: 90%;
         margin: 3%;
@@ -51,9 +78,9 @@
         background-color: #000000;
         border-radius: 15px;
       }
-      .route-details {
+      .stats-details {
         font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
-        font-size: 1em;
+        font-size: 15px;
         float: left;
         width: 36%;
         padding: 2%;
@@ -66,6 +93,11 @@
       .red {
         color: red;
       }
+
+      .hide {
+        display:none;
+      }
+
     </style>
   </head>
   <body>
@@ -82,7 +114,19 @@
 
       var selectors = {
         charts: "#charts",
-        reportDetails: "#report-details"
+        reportDetails: "#report-details",
+        panel: ".panel",
+        panels: {
+          stats: ".stats",
+          response: ".response",
+          request: ".request"
+        },
+        button: ".button",
+        buttons: {
+          stats: ".button-stats",
+          response: ".button-response",
+          request: ".button-request"
+        }
       };
 
       var formatNumber = function(number) {
@@ -119,17 +163,14 @@
           else
             errorsDesc = errorsDesc.substr(0, errorsDesc.length - 1) + ')';
 
-          var template = "<div class=\"route\"><div class=\"chart\" id=\"chart" + i + "\"></div>" +
-            "<div class=\"route-details\"><ul>" +
-            "<li><a href=\"" + routeData.href + "\" target=\"_blank\">" + routeData.href + "</a></li>" +
-
-            "<li>" + routeData.stats.sample.length + " run" +
-            (routeData.stats.sample.length > 1 ? "s" : "") + " sampled </li>" +
-
-            "<li>Concurrency level: " + routeData.options.concurrencyLevel + "</li>";
-
-          if(routeData.options.delay)
-            template += "<li>Delay between bench cycles: " + routeData.options.delay + "</li>";
+          var template = "<div class=\"route\"><div class=\"buttons\">" +
+            "<a href=\"#stats\" class=\"button button-stats selected\">Stats</a>" +
+            "<a href=\"#request\" class=\"button button-request\">Request details</a>" +
+            "<a href=\"#response\" class=\"button button-response\">Response details</a>" +
+            "</div><div class=\"stats panel\"><div class=\"chart\" id=\"chart" + i + "\"></div>" +
+            "<div class=\"stats-details\"><ul><li>" + routeData.stats.sample.length + " run" +
+            (routeData.stats.sample.length > 1 ? "s" : "") + " sampled with concurrency: " +
+            routeData.options.concurrencyLevel + "</li>";
 
           if(routeData.options.expectedStatusCode)
             template += "<li>Expected status code: " + routeData.options.expectedStatusCode + "</li>";
@@ -156,10 +197,64 @@
             "<li>Margin of error: " + fixNumber(routeData.stats.moe, 6) + "</li>" +
             "<li>The standard error of the mean: " + fixNumber(routeData.stats.sem, 6) + "</li>" +
             "<li>The sample variance: " + fixNumber(routeData.stats.variance, 6) + "</li>" +
-            "</ul></div></div>";
+            "</ul><ul><li>75% Percentile: " + fixNumber(routeData.stats.p75, 6) + "</li>" +
+            "<li>95% Percentile: " + fixNumber(routeData.stats.p95, 6) + "</li>" +
+            "<li>99% Percentile: " + fixNumber(routeData.stats.p99, 6) + "</li>" +
+            "<li>99.9% Percentile: " + fixNumber(routeData.stats.p999, 6) + "</li>" +
+            "</ul></div></div><div class=\"request panel hide\">Request: " + routeData.options.method.toUpperCase() + 
+            " <a href=\"" + routeData.href + "\" target=\"_blank\">" + 
+            routeData.href + "</a><br />Concurrency level: " + routeData.options.concurrencyLevel + "<br />";
+
+          if(routeData.options.delay)
+            template += "Delay between bench cycles: " + routeData.options.delay + "<br />";
+
+          var requestHeaders = "none",
+              requestData = "none";
+
+          if(!!routeData.request.headers)
+            requestHeaders = "<br /><pre><code>" + JSON.stringify(routeData.request.headers, undefined, 2) + "</pre></code>";
+
+          if(!!routeData.request.data)
+            requestData = "<br /><pre><code>" + JSON.stringify(routeData.request.data, undefined, 2) + "</pre></code>";
+
+          template += "<br />Headers sent: " + requestHeaders + "<br />Data sent: " + requestData + "<br /></div><div class=\"response panel hide\">Data here refers to the first sampled response.<br /><br />";
+
+          var responseHeader = JSON.stringify(routeData.response.header, undefined, 2),
+              responseBody = "";
+
+          try {
+            responseBody = JSON.stringify(JSON.parse(routeData.response.body), undefined, 2);
+          } catch(e){
+            responseBody = routeData.response.body;
+          }
+
+          template += "Response status: " + routeData.response.statusCode + "<br />Response headers:<br />" +
+            "<pre><code>" + responseHeader + "</code></pre>" +
+            "<br />Response body:<br /><pre><code>" + responseBody + "</code></pre><br /></div></div>";
 
           return template;
         }
+      };
+
+      var bindButtons = function(){
+        var bindButton = function(panelName){
+          $(selectors.buttons[panelName]).click(function(){
+            var $sender = $(this),
+                $panelsContainer = $sender.parent().parent();
+
+            $panelsContainer.find(selectors.button).removeClass("selected");
+            $sender.addClass("selected");
+
+            $panelsContainer.find(selectors.panel).addClass("hide");
+            $panelsContainer.find(selectors.panels[panelName]).removeClass("hide");
+
+            return false;
+          });
+        };
+
+        bindButton('stats');
+        bindButton('response');
+        bindButton('request');
       };
 
       $(function(){
@@ -288,6 +383,8 @@
             counter++;
           }
         }
+        hljs.initHighlightingOnLoad();
+        bindButtons();
       });
     </script>
   </body>
