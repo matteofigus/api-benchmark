@@ -98,10 +98,16 @@
         display:none;
       }
 
+      pre code {
+        overflow-x: auto;
+      }
+
     </style>
   </head>
   <body>
-    <script>var data={{ data }};</script>
+    <script><!--
+    var data={{ data }};
+    // --></script>
     <div id="report">
       <div id="report-details"><h1>Api Benchmark report</h1></div>
       <div id="charts"></div>
@@ -141,6 +147,10 @@
 
       var fixNumber = function(number, digits){
         return formatNumber(number.toFixed(digits));
+      };
+
+      var decodeHtml = function(text){
+        return $('<div/>').text(text).html();
       };
 
       var templates = {
@@ -223,9 +233,9 @@
               responseBody = "";
 
           try {
-            responseBody = JSON.stringify(JSON.parse(routeData.response.body), undefined, 2);
+            responseBody = JSON.stringify(JSON.parse(decodeHtml(routeData.response.body)), undefined, 2);
           } catch(e){
-            responseBody = routeData.response.body;
+            responseBody = decodeHtml(routeData.response.body);
           }
 
           template += "Response status: " + routeData.response.statusCode + "<br />Response headers:<br />" +
