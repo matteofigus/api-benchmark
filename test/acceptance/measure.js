@@ -28,6 +28,12 @@ describe('measure function', function(){
           route: '/errorRoute',
           method: 'get',
           statusCode: 403
+        },
+        xmlRoute: {
+          route: '/xmlRoute',
+          method: 'get',
+          statusCode: 200,
+          response: '<?xml version="1.0" encoding="UTF-8"?><hello>World</hello>'
         }
       };
 
@@ -215,7 +221,16 @@ describe('measure function', function(){
 
     apiBenchmark.measure(serversToBenchmark, { getRoute: endpoints.simpleRoute }, function(err, results){
       results['My api'].getRoute.response.body.should.not.be.eql(null);
-      results['My api'].getRoute.response.body.should.be.eql({ message: '/getJson' });
+      JSON.parse(results['My api'].getRoute.response.body).should.be.eql({ message: '/getJson' });
+      done();
+    });
+  });
+
+  it('should correctly save response body when xml', function(done){
+
+    apiBenchmark.measure(serversToBenchmark, { xmlRoute: endpoints.xmlRoute }, function(err, results){
+      results['My api'].xmlRoute.response.body.should.not.be.eql(null);
+      results['My api'].xmlRoute.response.body.should.be.eql('<?xml version="1.0" encoding="UTF-8"?><hello>World</hello>');
       done();
     });
   });
