@@ -126,7 +126,7 @@ var service = {
 var routes = { route1: 'route1', route2: 'route2' };
 
 apiBenchmark.measure(service, routes, function(err, results){
-  apiBenchmarl.getHtml(results, function(error, html){
+  apiBenchmark.getHtml(results, function(error, html){
     console.log(html);
     // now save it yourself to a file and enjoy
   });
