@@ -1,3 +1,5 @@
+'use strict';
+
 var DebugHelper = require('./../../lib/debug-helper');
 var should = require('should');
 

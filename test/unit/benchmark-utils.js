@@ -1,3 +1,5 @@
+'use strict';
+
 var benchmarkUtils = require('./../../lib/benchmark-utils');
 var should = require('should');
 var testData = require('./../fixtures/test-data');
@@ -6,12 +8,12 @@ describe('BenchmarkUtils.sort function', function(){
 
   it('should correctly sort multiple results by mean + moe', function(done) {
 
-    var testAveragesArray = testData.getAveragesArray({ 
-      'Slow server': { numericValues: 3 }, 
+    var testAveragesArray = testData.getAveragesArray({
+      'Slow server': { numericValues: 3 },
       'Medium-slow server': { numericValues: 2 },
       'Fast server': { numericValues: 1 }
     });
-    
+
     var sorted = benchmarkUtils.sort(testAveragesArray);
 
     sorted[0].name.should.be.eql("Fast server");
@@ -25,8 +27,8 @@ describe('BenchmarkUtils.getSuccessful function', function(){
 
   it('should correctly filter results with infinite hz', function(done) {
 
-    var testAveragesArray = testData.getAveragesArray({ 
-      server1: { numericValues: Infinity }, 
+    var testAveragesArray = testData.getAveragesArray({
+      server1: { numericValues: Infinity },
       server2: { numericValues: -Infinity }
     });
 
@@ -39,8 +41,8 @@ describe('BenchmarkUtils.getBenchmarkAverage function', function(){
 
   it('should correctly calculate the average of all the numeric values', function(done) {
 
-    var testServerResults = testData.getServerResults("serverName", { 
-      route1: { numericValues: 1 }, 
+    var testServerResults = testData.getServerResults("serverName", {
+      route1: { numericValues: 1 },
       route2: { numericValues: 3 }
     });
 

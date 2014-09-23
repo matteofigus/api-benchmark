@@ -1,3 +1,5 @@
+'use strict';
+
 var Runner = require('./../../lib/runner');
 var sanitise = require('./../../lib/sanitise');
 var Timer = require('./../../lib/timer');

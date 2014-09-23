@@ -1,3 +1,5 @@
+'use strict';
+
 var apiBenchmark = require('./../../index');
 var should = require('should');
 var TestServers = require('http-test-servers');
@@ -5,14 +7,14 @@ var TestServers = require('http-test-servers');
 describe('compare function', function(){
 
   var testServers,
-      servers = { "Slow server": { port: 3006, delay: 20 }, 
+      servers = { "Slow server": { port: 3006, delay: 20 },
                   "Fast server": { port: 3007, delay: 0 }};
 
   var serversToBenchmark = { "Slow server": "http://localhost:3006/",
                              "Fast server": "http://localhost:3007/"};
 
-  var endpoints = { 
-        simpleRoute: '/getJson', 
+  var endpoints = {
+        simpleRoute: '/getJson',
         secondaryRoute: '/getJson2',
         postRoute: {
           route: '/postJson',
