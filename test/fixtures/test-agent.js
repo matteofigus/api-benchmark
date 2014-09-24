@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports.FakeAgent = function(){ 
 
   this.end = function(callback){
@@ -6,7 +8,7 @@ module.exports.FakeAgent = function(){
       headers: this.headers
     });
   };
-  
+
   this.get = function(request){
     return this;
   };
@@ -23,5 +25,5 @@ module.exports.FakeAgent = function(){
   this.set = function(name, value){
     this.headers = this.headers || {};
     this.headers[name] = value;
-  }; 
+  };
 };

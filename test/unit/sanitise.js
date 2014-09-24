@@ -1,3 +1,5 @@
+'use strict';
+
 var sanitise = require('./../../lib/sanitise');
 
 describe('sanitise.endpoint function', function(){
@@ -13,13 +15,13 @@ describe('sanitise.endpoint function', function(){
     sanitised.method.should.be.eql('get');
     done();
   });
-  
+
 });
 
 describe('sanitise.initialInput function', function(){
 
   it('should correctly handle the fact that options is an optional parameter', function(done){
-    var sanitised = sanitise.initialInput({ 
+    var sanitised = sanitise.initialInput({
       thisIs: 'an object representing the services'
     },{
       thisIs: 'an object representing the endpoints'

@@ -11,6 +11,7 @@
   "bugs": {
     "url": "https://github.com/matteofigus/api-benchmark/issues"
   },
+  "homepage": "http://www.api-benchmark.com/",
   "keywords": [
     "benchmark",
     "api",
@@ -20,7 +21,7 @@
     "deployment",
     "continuous delivery"
   ],
-  "main": "index",
+  "main": "index.js",
   "engines": {
     "node": ">=0.8.x",
     "npm": ">=1.2.x"
@@ -31,11 +32,19 @@
     "give-me": "0.0.15"
   },
   "devDependencies": {
-    "should": "3.3.2",
+    "http-test-servers": "0.0.12",
+    "jshint": "2.5.6",
     "mocha": "",
-    "http-test-servers": "0.0.12"
+    "should": "3.3.2"
   },
   "scripts": {
+    "pretest": "jshint **/*.js",
     "test": "node test/index"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Michael Sanford",
+      "email": "michaelsanford0@gmail.com"
+    }
+  ]
 }

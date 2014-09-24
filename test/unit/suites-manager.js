@@ -1,3 +1,5 @@
+'use strict';
+
 var DebugHelper = require('./../../lib/debug-helper');
 var SuitesManager = require('./../../lib/suites-manager');
 var should = require('should');
@@ -16,10 +18,10 @@ describe('SuitesManager.addEndpoints function', function(){
 
     suites.addEndpoints({ routeName: { route: '/route', method: 'get', headers: { 'name': 'value' } }});
 
-    _.find(suites.routes, function(route){ 
+    _.find(suites.routes, function(route){
       return route.name == 'routeName'
     }).endpoint.headers.should.be.eql({ name: 'value'});
-    
+
     done();
   });
 });
@@ -44,25 +46,25 @@ describe('SuitesManager.logFinalComparisonResult function', function(){
 
   it('should correctly log the faster in case of comparison', function(done) {
 
-    var results = { 
-      'Slow server': { 
-        simpleRoute: { 
+    var results = {
+      'Slow server': {
+        simpleRoute: {
           name: 'Slow server/simpleRoute',
           stats: [],
           hz: 4.831093764217758,
-          href: 'http://localhost:3006/getJson' 
+          href: 'http://localhost:3006/getJson'
         },
-        isSlowest: true 
+        isSlowest: true
       },
-      'Fast server': { 
-        simpleRoute: { 
+      'Fast server': {
+        simpleRoute: {
           name: 'Fast server/simpleRoute',
           stats: [],
           hz: 217.14933595635625,
-          href: 'http://localhost:3007/getJson' 
+          href: 'http://localhost:3007/getJson'
         },
-        isFastest: true 
-      } 
+        isFastest: true
+      }
     };
 
     var fakeLogger = new FakeLogger(),
@@ -76,15 +78,15 @@ describe('SuitesManager.logFinalComparisonResult function', function(){
 
   it('should not log anything in case of a single service', function(done) {
 
-    var results = { 
-      'Slow server': { 
-        simpleRoute: { 
+    var results = {
+      'Slow server': {
+        simpleRoute: {
           name: 'Slow server/simpleRoute',
           stats: [],
           hz: 4.831093764217758,
-          href: 'http://localhost:3006/getJson' 
+          href: 'http://localhost:3006/getJson'
         },
-        isFastest: true 
+        isFastest: true
       }
     };
 

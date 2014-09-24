@@ -1,3 +1,5 @@
+'use strict';
+
 var apiBenchmark = require('./../../lib/api-benchmark');
 
 describe('apiBenchmark module', function(){

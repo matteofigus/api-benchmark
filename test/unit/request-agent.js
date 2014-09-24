@@ -1,3 +1,5 @@
+'use strict';
+
 var RequestAgent = require('./../../lib/request-agent');
 var should = require('should');
 var testAgent = require('./../fixtures/test-agent');
@@ -14,7 +16,7 @@ describe('requestAgent.make function', function(){
   });
 
   it('should correctly handle null data', function(done){
-      requestAgent.make({ 
+      requestAgent.make({
         route: '/post',
         method: 'post',
         data: null
@@ -25,7 +27,7 @@ describe('requestAgent.make function', function(){
   });
 
   it('should correctly handle undefined data', function(done){
-      requestAgent.make({ 
+      requestAgent.make({
         route: '/post',
         method: 'post',
         data: undefined
@@ -44,7 +46,7 @@ describe('requestAgent.make function', function(){
       return { c: i };
     }
 
-    var request = { 
+    var request = {
       route: '/post',
       method: 'post',
       data: dataFunc
@@ -60,7 +62,7 @@ describe('requestAgent.make function', function(){
   });
 
   it('should correctly handle cookies', function(done){
-      requestAgent.make({ 
+      requestAgent.make({
         route: '/get',
         method: 'get',
         headers: {
@@ -73,7 +75,7 @@ describe('requestAgent.make function', function(){
   });
 
   it('should correctly handle headers', function(done){
-      requestAgent.make({ 
+      requestAgent.make({
         route: '/get',
         method: 'get',
         headers: {
@@ -96,13 +98,13 @@ describe('requestAgent.make function', function(){
       return { c: i };
     }
 
-    var request = { 
+    var request = {
       route: '/get',
       method: 'get',
       headers: headersFunc
     };
 
-    requestAgent.make(request, function(err, fakeResults){ 
+    requestAgent.make(request, function(err, fakeResults){
       fakeResults.headers.should.be.eql({c: 1});
       requestAgent.make(request, function(err, fakeResults){
         fakeResults.headers.should.be.eql({c: 2});
