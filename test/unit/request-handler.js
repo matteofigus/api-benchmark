@@ -1,3 +1,5 @@
+'use strict';
+
 var requestHandler = require('./../../lib/request-handler');
 
 describe('requestHandler.setup function', function(){
@@ -55,9 +57,9 @@ describe('requestHandler.make function', function(){
 
     var fakeAgent = {
       make: function(req, callback){
-        callback({ 
+        callback({
           code: 'ECONNREFUSED',
-          message: 'connect ECONNREFUSED' 
+          message: 'connect ECONNREFUSED'
         }, null);
       }
     };
@@ -70,7 +72,3 @@ describe('requestHandler.make function', function(){
   });
 
 });
-
-
-
-

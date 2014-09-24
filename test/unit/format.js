@@ -1,3 +1,5 @@
+'use strict';
+
 var format = require('../../lib/format');
 var should = require('should');
 

@@ -1,8 +1,10 @@
+'use strict';
+
 var Mocha = require('mocha'),
     fs = require('fs');
 
 var runAcceptanceTests = function(callback){
-	console.log("Running acceptance tests...");
+	console.log('Running acceptance tests...');
 	var acceptance = new Mocha({timeout: 60000, reporter: 'list' });
 
 	fs.readdirSync('./test/acceptance/')
@@ -13,7 +15,7 @@ var runAcceptanceTests = function(callback){
 };
 
 var runUnitTests = function(callback){
-	console.log("Running unit tests...");
+	console.log('Running unit tests...');
 	var unit = new Mocha({ reporter: 'list'});
 
 	fs.readdirSync('./test/unit/')
@@ -24,8 +26,9 @@ var runUnitTests = function(callback){
 };
 
 runUnitTests(function(failures){
-	if(failures)
+	if(failures) {
 		process.exit(failures);
-	else
+	} else {
 		runAcceptanceTests(process.exit);
+	}
 });

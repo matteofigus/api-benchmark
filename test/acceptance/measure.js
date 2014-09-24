@@ -1,3 +1,5 @@
+'use strict';
+
 var apiBenchmark = require('./../../index');
 var should = require('should');
 var TestServers = require('http-test-servers');
@@ -9,8 +11,8 @@ describe('measure function', function(){
                  "My slow api": { port: 3007, delay: 100 }},
       serversToBenchmark = { "My api": "http://localhost:3006/"},
       slowServersToBenchmark = { "My api": "http://localhost:3007/"},
-      endpoints = { 
-        simpleRoute: '/getJson', 
+      endpoints = {
+        simpleRoute: '/getJson',
         secondaryRoute: '/getJson2',
         postRoute: {
           route: '/postJson',
@@ -38,7 +40,7 @@ describe('measure function', function(){
       };
 
   before(function(done){
-    
+
     var serversToStart = new TestServers(endpoints, server);
     serversToStart.start(function(httpTestServers){
       testServers = httpTestServers;
@@ -183,7 +185,7 @@ describe('measure function', function(){
   });
 
   it('should correctly save request headers', function(done){
-    
+
     var routesToBenchmark = {
       headersRoute: {
         route: "/getJson",

@@ -1,3 +1,5 @@
+'use strict';
+
 var validator = require('./../../lib/validator');
 var should = require('should');
 
@@ -40,23 +42,23 @@ describe('Validator.checkEndpoints function', function(){
 describe('Validator.checkServices function', function(){
 
   it('should correctly return an error if the services parameter is null', function(done){
-    var result = validator.checkServices(null);    
+    var result = validator.checkServices(null);
     result.should.be.eql("Services argument is not valid");
     done();
   });
-  
+
   it('should correctly return an error if the services parameter is not an object', function(done){
-    var result = validator.checkServices([]);    
+    var result = validator.checkServices([]);
     result.should.be.eql("Services argument is not valid");
     done();
   });
 
   it('should correctly return an error if the services parameter is an empty object', function(done){
-    var result = validator.checkServices({});    
+    var result = validator.checkServices({});
     result.should.be.eql("Services argument is not valid");
     done();
   });
-  
+
 });
 
 describe('Validator.checkCallback function', function(){

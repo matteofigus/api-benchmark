@@ -1,3 +1,5 @@
+'use strict';
+
 var Timer = require('./../../lib/timer');
 
 describe('Timer class', function(){
