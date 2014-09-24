@@ -1,5 +1,8 @@
 language: node_js
 
+before_install:
+  - "npm install npm -g"
+
 before_script:
   - "npm install -g jshint@2.5.6"
 
