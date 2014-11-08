@@ -27,9 +27,9 @@
     "npm": ">=1.2.x"
   },
   "dependencies": {
-    "superagent": "0.15.7",
+    "superagent": "0.19.0",
     "underscore": "1.6.0",
-    "give-me": "0.0.15"
+    "give-me": "0.1.0"
   },
   "devDependencies": {
     "http-test-servers": "0.0.12",
