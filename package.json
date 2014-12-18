@@ -38,7 +38,7 @@
     "should": "3.3.2"
   },
   "scripts": {
-    "pretest": "jshint **/*.js",
+    "pretest": "jshint lib test templates index.js",
     "test": "node test/index"
   },
   "contributors": [
