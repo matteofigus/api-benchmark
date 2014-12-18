@@ -7,10 +7,10 @@ var TestServers = require('http-test-servers');
 describe('measure function', function(){
 
   var testServers,
-      server = { "My api": { port: 3006, delay: 0 },
-                 "My slow api": { port: 3007, delay: 100 }},
-      serversToBenchmark = { "My api": "http://localhost:3006/"},
-      slowServersToBenchmark = { "My api": "http://localhost:3007/"},
+      server = { 'My api': { port: 3006, delay: 0 },
+                 'My slow api': { port: 3007, delay: 100 }},
+      serversToBenchmark = { 'My api': 'http://localhost:3006/'},
+      slowServersToBenchmark = { 'My api': 'http://localhost:3007/'},
       endpoints = {
         simpleRoute: '/getJson',
         secondaryRoute: '/getJson2',
@@ -79,9 +79,9 @@ describe('measure function', function(){
 
   it('should correctly display options for each result', function(done) {
     apiBenchmark.measure(serversToBenchmark, { simpleRoute: endpoints.simpleRoute }, { runMode: 'parallel', maxConcurrentRequests: 10 }, function(err, results){
-      results['My api'].simpleRoute.href.should.be.eql("http://localhost:3006/getJson");
+      results['My api'].simpleRoute.href.should.be.eql('http://localhost:3006/getJson');
       results['My api'].simpleRoute.options.concurrencyLevel.should.be.eql(10);
-      results['My api'].simpleRoute.options.method.should.be.eql("get");
+      results['My api'].simpleRoute.options.method.should.be.eql('get');
       done();
     });
   });
@@ -90,17 +90,17 @@ describe('measure function', function(){
 
     var routesToBenchmark = {
       simpleRoute: {
-        route: "/getJson",
+        route: '/getJson',
         expectedStatusCode: 200
       },
       errorRoute: {
-        route: "/errorRoute",
+        route: '/errorRoute',
         expectedStatusCode: 200
       }
     };
 
     apiBenchmark.measure(serversToBenchmark, routesToBenchmark, function(err, results){
-      err.should.be.eql("Expected Status code was 200 but I got a 403 for My api/errorRoute");
+      err.should.be.eql('Expected Status code was 200 but I got a 403 for My api/errorRoute');
       should.not.exist(results);
       done();
     });
@@ -110,13 +110,13 @@ describe('measure function', function(){
 
     var routesToBenchmark = {
       simpleRoute: {
-        route: "/getJson",
+        route: '/getJson',
         maxMean: 0.080
       }
     };
 
     apiBenchmark.measure(slowServersToBenchmark, routesToBenchmark, { minSamples: 2 }, function(err, results){
-      err.should.be.eql("Mean should be below 0.08");
+      err.should.be.eql('Mean should be below 0.08');
       should.not.exist(results);
       done();
     });
@@ -126,13 +126,13 @@ describe('measure function', function(){
 
     var routesToBenchmark = {
       simpleRoute: {
-        route: "/getJson",
+        route: '/getJson',
         maxSingleMean: 0.040
       }
     };
 
     apiBenchmark.measure(slowServersToBenchmark, routesToBenchmark, { minSamples: 2, maxConcurrentRequests: 2, runMode: 'parallel' }, function(err, results){
-      err.should.be.eql("Mean across all concurrent requests should be below 0.04");
+      err.should.be.eql('Mean across all concurrent requests should be below 0.04');
       should.not.exist(results);
       done();
     });
@@ -142,11 +142,11 @@ describe('measure function', function(){
 
     var routesToBenchmark = {
       simpleRoute: {
-        route: "/getJson",
+        route: '/getJson',
         maxMean: 0.08
       },
       errorRoute: {
-        route: "/errorRoute",
+        route: '/errorRoute',
         expectedStatusCode: 200
       }
     };
@@ -188,7 +188,7 @@ describe('measure function', function(){
 
     var routesToBenchmark = {
       headersRoute: {
-        route: "/getJson",
+        route: '/getJson',
         maxSingleMean: 0.040,
         headers: {
           'Accept-language': '*'

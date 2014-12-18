@@ -27,7 +27,7 @@ describe('sanitise.initialInput function', function(){
       thisIs: 'an object representing the endpoints'
     },
     function(){
-      return 'this is the callback'
+      return 'this is the callback';
     });
 
     sanitised.options.should.be.eql({});

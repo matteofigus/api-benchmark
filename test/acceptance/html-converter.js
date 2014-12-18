@@ -7,10 +7,10 @@ var TestServers = require('http-test-servers');
 describe('getHtml function', function(){
 
   var testServers,
-      server = { "My api": { port: 3006, delay: 0 },
-                 "My slow api": { port: 3007, delay: 100 }},
-      serversToBenchmark = { "My api": "http://localhost:3006/"},
-      slowServersToBenchmark = { "My api": "http://localhost:3007/"},
+      server = { 'My api': { port: 3006, delay: 0 },
+                 'My slow api': { port: 3007, delay: 100 }},
+      serversToBenchmark = { 'My api': 'http://localhost:3006/'},
+      slowServersToBenchmark = { 'My api': 'http://localhost:3007/'},
       endpoints = {
         simpleRoute: '/getJson'
       };
@@ -33,10 +33,10 @@ describe('getHtml function', function(){
 
       apiBenchmark.getHtml(results, function(err, html){
         html.should.not.be.eql(null);
-        html.indexOf("<html>").should.be.above(0);
+        html.indexOf('<html>').should.be.above(0);
         done();
       });
 
-    })
+    });
   });
 });

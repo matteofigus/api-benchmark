@@ -16,7 +16,7 @@ describe('requestHandler.setup function', function(){
 
     var suiteObj = {
       endpoint: {
-        aProperty: "value"
+        aProperty: 'value'
       },
       runner: {
         add: function(suiteName, suiteHref, suiteOptions, suiteRequest, callback){
@@ -25,12 +25,12 @@ describe('requestHandler.setup function', function(){
       }
     };
 
-    requestHandler.setup("suiteName", "suiteHref", suiteObj, fakeAgent);
+    requestHandler.setup('suiteName', 'suiteHref', suiteObj, fakeAgent);
 
     var req = fakeAgentStack[0][0];
 
-    req.url.should.be.eql("suiteHref");
-    req.aProperty.should.be.eql("value");
+    req.url.should.be.eql('suiteHref');
+    req.aProperty.should.be.eql('value');
 
     done();
   });
@@ -46,9 +46,9 @@ describe('requestHandler.make function', function(){
       }
     };
 
-    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, "suiteName", fakeAgent, function(err, success){
+    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, 'suiteName', fakeAgent, function(err, success){
       success.should.be.eql(false);
-      err.code.should.be.eql("httpStatusCodeNotMatching");
+      err.code.should.be.eql('httpStatusCodeNotMatching');
       done();
     });
   });
@@ -64,9 +64,9 @@ describe('requestHandler.make function', function(){
       }
     };
 
-    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, "suiteName", fakeAgent, function(err, success){
+    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, 'suiteName', fakeAgent, function(err, success){
       success.should.be.eql(false);
-      err.code.should.be.eql("ECONNREFUSED");
+      err.code.should.be.eql('ECONNREFUSED');
       done();
     });
   });

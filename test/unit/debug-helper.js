@@ -22,9 +22,9 @@ describe('log function', function(){
     var fakeLogger = new FakeLogger(),
         debugHelper = new DebugHelper(fakeLogger);
 
-    debugHelper.simpleLog("Message");
+    debugHelper.simpleLog('Message');
 
-    fakeLogger.logStack[0].should.be.eql("Message");
+    fakeLogger.logStack[0].should.be.eql('Message');
     done();
   });
 
@@ -33,11 +33,11 @@ describe('log function', function(){
     var fakeLogger = new FakeLogger(),
         debugHelper = new DebugHelper(fakeLogger);
 
-    debugHelper.log("Message");
+    debugHelper.log('Message');
 
-    fakeLogger.logStack[0].should.be.eql("======================================");
-    fakeLogger.logStack[1].should.be.eql("Message");
-    fakeLogger.logStack[2].should.be.eql("");
+    fakeLogger.logStack[0].should.be.eql('======================================');
+    fakeLogger.logStack[1].should.be.eql('Message');
+    fakeLogger.logStack[2].should.be.eql('');
 
     done();
   });
@@ -47,11 +47,11 @@ describe('log function', function(){
     var fakeLogger = new FakeLogger(),
         debugHelper = new DebugHelper(fakeLogger);
 
-    debugHelper.log("Message");
+    debugHelper.log('Message');
 
-    fakeLogger.logStack[0].should.be.eql("======================================");
-    fakeLogger.logStack[1].should.be.eql("Message");
-    fakeLogger.logStack[2].should.be.eql("");
+    fakeLogger.logStack[0].should.be.eql('======================================');
+    fakeLogger.logStack[1].should.be.eql('Message');
+    fakeLogger.logStack[2].should.be.eql('');
 
     done();
   });
@@ -63,8 +63,8 @@ describe('log function', function(){
 
     debugHelper.shutUp();
 
-    debugHelper.simpleLog("Message");
-    debugHelper.log("Message");
+    debugHelper.simpleLog('Message');
+    debugHelper.log('Message');
 
     fakeLogger.logStack.length.should.be.eql(0);
     done();

@@ -35,9 +35,10 @@ var testData = {
   },
   getServersResults: function(serversArray){
     var results = {};
-    for(var i = 0; i < serversArray.length; i++)
+    for(var i = 0; i < serversArray.length; i++){
       results[serversArray[i].name] = testData.getServerResults(serversArray[i].name, serversArray[i].routes);
-
+    }
+    
     return results;
   }
 };

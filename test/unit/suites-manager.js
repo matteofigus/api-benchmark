@@ -19,7 +19,7 @@ describe('SuitesManager.addEndpoints function', function(){
     suites.addEndpoints({ routeName: { route: '/route', method: 'get', headers: { 'name': 'value' } }});
 
     _.find(suites.routes, function(route){
-      return route.name == 'routeName'
+      return route.name === 'routeName';
     }).endpoint.headers.should.be.eql({ name: 'value'});
 
     done();
@@ -36,7 +36,7 @@ describe('SuitesManager.logFinalComparisonResult function', function(){
 
     this.simpleLog = function(message){
       self.log(message);
-    }
+    };
 
     this.log = function(message){
       self.logStack.push(message);

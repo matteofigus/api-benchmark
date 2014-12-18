@@ -44,7 +44,7 @@ describe('requestAgent.make function', function(){
     var dataFunc = function(){
       i++;
       return { c: i };
-    }
+    };
 
     var request = {
       route: '/post',
@@ -96,7 +96,7 @@ describe('requestAgent.make function', function(){
     var headersFunc = function(){
       i++;
       return { c: i };
-    }
+    };
 
     var request = {
       route: '/get',
