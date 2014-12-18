@@ -27,7 +27,7 @@ If you want to benchmark your api via [grunt](http://gruntjs.com/) take a look a
 
 Node version: min: **0.8.0**, recommended: **>=0.10.13**
 
-Build status: [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark)
+Build status: Unix: [![Build Status](https://secure.travis-ci.org/matteofigus/api-benchmark.png?branch=master)](http://travis-ci.org/matteofigus/api-benchmark) | Windows: [![Build status](https://ci.appveyor.com/api/projects/status/7lo2m92rg4cy47u7/branch/master?svg=true)](https://ci.appveyor.com/project/matteofigus/api-benchmark/branch/master)
 
 [![NPM](https://nodei.co/npm/api-benchmark.png?downloads=true)](https://npmjs.org/package/api-benchmark)
 
