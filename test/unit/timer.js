@@ -11,9 +11,9 @@ describe('Timer class', function(){
     timer.start();
     setTimeout(function() {
       timer.stop();
-      timer.time.should.be.within(0.009, 0.018);
+      timer.time.should.be.within(0.09, 0.12);
       done();
-    }, 10);
+    }, 100);
   });
 
   it('should correctly perform a stop + restart action', function(done){
@@ -26,10 +26,10 @@ describe('Timer class', function(){
         timer.start();
         setTimeout(function() {
           timer.stop();
-          timer.time.should.be.within(0.019, 0.029);
+          timer.time.should.be.within(0.19, 0.22);
           done();
-        }, 10);
-      }, 10);
-    }, 10);
+        }, 100);
+      }, 100);
+    }, 100);
   });
 });
