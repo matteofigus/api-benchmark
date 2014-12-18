@@ -11,7 +11,7 @@ describe('Timer class', function(){
     timer.start();
     setTimeout(function() {
       timer.stop();
-      timer.time.should.be.within(0.010, 0.015);
+      timer.time.should.be.within(0.009, 0.018);
       done();
     }, 10);
   });
@@ -26,7 +26,7 @@ describe('Timer class', function(){
         timer.start();
         setTimeout(function() {
           timer.stop();
-          timer.time.should.be.within(0.020, 0.025);
+          timer.time.should.be.within(0.019, 0.029);
           done();
         }, 10);
       }, 10);
