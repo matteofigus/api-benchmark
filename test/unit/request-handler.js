@@ -1,6 +1,7 @@
 'use strict';
 
 var requestHandler = require('./../../lib/request-handler');
+var should = require('should');
 
 describe('requestHandler.setup function', function(){
 

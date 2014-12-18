@@ -1,5 +1,6 @@
 'use strict';
 
+var should = require('should');
 var Timer = require('./../../lib/timer');
 
 describe('Timer class', function(){

@@ -1,7 +1,7 @@
 'use strict';
 
-var validator = require('./../../lib/validator');
 var should = require('should');
+var validator = require('./../../lib/validator');
 
 var endpoints = { simpleRoute: '/getJson', secondaryRoute: '/getJson2' };
 var servers = {

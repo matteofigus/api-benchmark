@@ -2,6 +2,7 @@
 
 var Runner = require('./../../lib/runner');
 var sanitise = require('./../../lib/sanitise');
+var should = require('should');
 var Timer = require('./../../lib/timer');
 var _ = require('underscore');
 

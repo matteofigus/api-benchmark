@@ -1,6 +1,7 @@
 'use strict';
 
 var sanitise = require('./../../lib/sanitise');
+var should = require('should');
 
 describe('sanitise.endpoint function', function(){
 
