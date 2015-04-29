@@ -219,7 +219,8 @@
             template += 'Delay between bench cycles: ' + routeData.options.delay + '<br />';
 
           var requestHeaders = 'none',
-              requestData = 'none';
+              requestData = 'none',
+              requestQuery = 'none';
 
           if(!!routeData.request.headers)
             requestHeaders = '<br /><pre><code>' + JSON.stringify(routeData.request.headers, undefined, 2) + '</pre></code>';
@@ -227,7 +228,10 @@
           if(!!routeData.request.data)
             requestData = '<br /><pre><code>' + JSON.stringify(routeData.request.data, undefined, 2) + '</pre></code>';
 
-          template += '<br />Headers sent: ' + requestHeaders + '<br />Data sent: ' + requestData + '<br /></div><div class="response panel hide">Data here refers to the first sampled response.<br /><br />';
+          if(!!routeData.request.query)
+            requestQuery = '<br /><pre><code>' + JSON.stringify(routeData.request.query, undefined, 2) + '</pre></code>';
+
+          template += '<br />Headers sent: ' + requestHeaders + '<br />Data sent: ' + requestData + '<br />Query sent: ' + requestQuery + '<br /></div><div class="response panel hide">Data here refers to the first sampled response.<br /><br />';
 
           var responseHeader = JSON.stringify(routeData.response.header, undefined, 2),
               responseBody = '';
