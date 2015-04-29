@@ -147,6 +147,9 @@ apiBenchmark.measure(service, routes, function(err, results){
 #### data
   (Object): the data sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
 
+#### query
+  (Object): the query sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
+
 #### expectedStatusCode
   (Number, default null): if it is a number, generates an error when the status code of the response is different
 
