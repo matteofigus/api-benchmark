@@ -198,7 +198,12 @@ ulimit -S -n 20000
 
 For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
 Feel free to open new Issues in case of Bugs or Feature requests.
-Pull requests are welcome, possibly in new branches.
+Pull requests are welcome: first run all the tests locally doing `npm test`.
+
+Contributors:
+
+* [Derek Myers](https://github.com/dmyers)
+* [Michael Sanford](https://github.com/michaelsanford)
 
 ### Tests
 
