@@ -147,6 +147,9 @@ apiBenchmark.measure(service, routes, function(err, results){
 #### data
   (Object): the data sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
 
+#### query
+  (Object): the query sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
+
 #### expectedStatusCode
   (Number, default null): if it is a number, generates an error when the status code of the response is different
 
@@ -195,7 +198,12 @@ ulimit -S -n 20000
 
 For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
 Feel free to open new Issues in case of Bugs or Feature requests.
-Pull requests are welcome, possibly in new branches.
+Pull requests are welcome: first run all the tests locally doing `npm test`.
+
+Contributors:
+
+* [Derek Myers](https://github.com/dmyers)
+* [Michael Sanford](https://github.com/michaelsanford)
 
 ### Tests
 

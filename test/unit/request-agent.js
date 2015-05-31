@@ -3,6 +3,7 @@
 var RequestAgent = require('./../../lib/request-agent');
 var should = require('should');
 var testAgent = require('./../fixtures/test-agent');
+var _ = require('underscore');
 
 describe('requestAgent.make function', function(){
 
@@ -21,7 +22,7 @@ describe('requestAgent.make function', function(){
         method: 'post',
         data: null
       }, function(err, fakeResults){
-        fakeResults.data.should.be.eql({});
+        _.isUndefined(fakeResults.data).should.be.eql(true);
         done();
       });
   });
@@ -32,7 +33,7 @@ describe('requestAgent.make function', function(){
         method: 'post',
         data: undefined
       }, function(err, fakeResults){
-        fakeResults.data.should.be.eql({});
+        _.isUndefined(fakeResults.data).should.be.eql(true);
         done();
       });
   });
@@ -56,6 +57,30 @@ describe('requestAgent.make function', function(){
       fakeResults.data.should.be.eql({c: 1});
       requestAgent.make(request, function(err, fakeResults){
         fakeResults.data.should.be.eql({c: 2});
+        done();
+      });
+    });
+  });
+
+  it('should correctly handle query as a function', function(done){
+
+    var i = 0;
+
+    var queryFunc = function(){
+      i++;
+      return { c: i };
+    };
+
+    var request = {
+      route: '/get',
+      method: 'get',
+      query: queryFunc
+    };
+
+    requestAgent.make(request, function(err, fakeResults){
+      fakeResults.query.should.be.eql({c: 1});
+      requestAgent.make(request, function(err, fakeResults){
+        fakeResults.query.should.be.eql({c: 2});
         done();
       });
     });
