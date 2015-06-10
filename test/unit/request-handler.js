@@ -43,12 +43,12 @@ describe('requestHandler.make function', function(){
 
     var fakeAgent = {
       make: function(req, callback){
-        callback(null, { status: 200 });
+        callback(null, { statusCode: 200 });
       }
     };
 
-    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, 'suiteName', fakeAgent, function(err, success){
-      success.should.be.eql(false);
+    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, 'suiteName', fakeAgent, function(err, res){
+      res.should.be.eql(false);
       err.code.should.be.eql('httpStatusCodeNotMatching');
       done();
     });
@@ -65,8 +65,8 @@ describe('requestHandler.make function', function(){
       }
     };
 
-    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, 'suiteName', fakeAgent, function(err, success){
-      success.should.be.eql(false);
+    requestHandler.make({}, { endpoint: { expectedStatusCode: 400 }}, 'suiteName', fakeAgent, function(err, res){
+      res.should.be.eql(false);
       err.code.should.be.eql('ECONNREFUSED');
       done();
     });
