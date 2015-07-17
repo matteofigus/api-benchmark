@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>Api Benchmark :: report</title>
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/excanvas.min.js"></script><![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -211,8 +212,8 @@
             '<li>95% Percentile: ' + fixNumber(routeData.stats.p95, 6) + '</li>' +
             '<li>99% Percentile: ' + fixNumber(routeData.stats.p99, 6) + '</li>' +
             '<li>99.9% Percentile: ' + fixNumber(routeData.stats.p999, 6) + '</li>' +
-            '</ul></div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() + 
-            ' <a href="' + routeData.href + '" target="_blank">' + 
+            '</ul></div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() +
+            ' <a href="' + routeData.href + '" target="_blank">' +
             routeData.href + '</a><br />Concurrency level: ' + routeData.options.concurrencyLevel + '<br />';
 
           if(routeData.options.delay)
