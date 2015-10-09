@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -66,6 +66,12 @@
         float: left;
       }
 
+      .distchart {
+        width: 96%;
+        height: 450px;
+        float: left;
+      }
+
       .panel {
         height: 450px;
         overflow-y: auto;
@@ -125,12 +131,14 @@
         panel: '.panel',
         panels: {
           stats: '.stats',
+          distribution: '.distribution',
           response: '.response',
           request: '.request'
         },
         button: '.button',
         buttons: {
           stats: '.button-stats',
+          distribution: '.button-distribution',
           response: '.button-response',
           request: '.button-request'
         }
@@ -176,6 +184,7 @@
 
           var template = '<div class="route"><div class="buttons">' +
             '<a href="#stats" class="button button-stats selected">Stats</a>' +
+            '<a href="#distribution" class="button button-distribution">Distribution</a>' +
             '<a href="#request" class="button button-request">Request details</a>' +
             '<a href="#response" class="button button-response">Response details</a>' +
             '</div><div class="stats panel"><div class="chart" id="chart' + i + '"></div>' +
@@ -212,7 +221,8 @@
             '<li>95% Percentile: ' + fixNumber(routeData.stats.p95, 6) + '</li>' +
             '<li>99% Percentile: ' + fixNumber(routeData.stats.p99, 6) + '</li>' +
             '<li>99.9% Percentile: ' + fixNumber(routeData.stats.p999, 6) + '</li>' +
-            '</ul></div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() +
+            '</ul></div></div><div class="distribution panel"><div class="distchart" id="distchart' + i + '">' +
+            '</div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() +
             ' <a href="' + routeData.href + '" target="_blank">' +
             routeData.href + '</a><br />Concurrency level: ' + routeData.options.concurrencyLevel + '<br />';
 
@@ -268,6 +278,7 @@
         };
 
         bindButton('stats');
+        bindButton('distribution');
         bindButton('response');
         bindButton('request');
       };
@@ -394,12 +405,91 @@
               series: series
             };
 
-            var plot = $.jqplot('chart' + counter, lines, options);
+            $.jqplot('chart' + counter, lines, options);
             counter++;
           }
         }
         hljs.initHighlightingOnLoad();
         bindButtons();
+      });
+
+      $(function(){
+        var counter = 0;
+        for(serviceName in data.benchmark){
+          for(routeName in data.benchmark[serviceName]){
+            var samples = data.benchmark[serviceName][routeName]['stats']['sample'];
+            var buckets = [[0.001, 0], [0.005, 0], [0.01, 0], [0.015, 0], [0.025, 0], [0.05, 0], [0.1, 0], [0.25, 0], [0.333, 0], [0.5, 0], [0.750, 0], [1.5, 0], [3, 0], [6, 0], [12, 0], [50, 0], [100, 0], [300, 0], [1000, 0]];
+            for(var i = 0; i<samples.length; i++) {
+              for (var j =0; j<buckets.length; j++) {
+                if(buckets[j][0]>= samples[i]){
+                  buckets[j][1] += 100/samples.length;
+                  break;
+                }
+              };
+            }
+
+            var distribution = [];
+            for(i =0; i<buckets.length; i++) {
+              if(buckets[i][1]){
+                distribution.push(buckets[i]);
+              }
+            }
+            var lines = [distribution],
+                series = [{
+                  showMarker: false,
+                  pointLabels: { show: true },
+                  label: 'Samples',
+                  color: '#6699FF'
+                }];
+
+            var options = {
+              title: {
+                text: data.benchmark[serviceName][routeName]['name'],
+                color: '#F1F1F1'
+              },
+              animate: true,
+              grid: {
+                background: '#000000', textColor: '#F1F1F1'
+              },
+              seriesDefaults:{
+                rendererOptions: {
+                  showDataLabels: true
+                }
+              },
+              highlighter: {
+                show: true,
+                sizeAdjust: 7.5
+              },
+              legend: {
+                show:true,
+                location: 'se',
+                background: 'rgba(101, 0, 253, 0.89)'
+              },
+              axesDefaults: {
+                labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+              },
+              axes: {
+                xaxis: {
+                  label: 'Response time (seconds)',
+                  tickOptions: {
+                    formatString:'%.3f'
+                  }
+                },
+                yaxis: {
+                  label: 'Percent of responses',
+                  tickOptions: {
+                    formatString: '%.1f%'
+                  }
+                }
+              },
+              series: series
+            };
+
+            $.jqplot('distchart' + counter, lines, options);
+            counter++;
+          }
+        }
+        $(".distribution.panel").addClass('hide');
       });
     </script>
   </body>
