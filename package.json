@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "http-test-servers": "0.0.12",
+    "injectr": "^0.5.1",
     "jshint": "2.5.10",
     "mocha": "",
     "should": "3.3.2"
