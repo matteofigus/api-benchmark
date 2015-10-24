@@ -5,7 +5,7 @@ var Mocha = require('mocha'),
 
 var runAcceptanceTests = function(callback){
 	console.log('Running acceptance tests...');
-	var acceptance = new Mocha({timeout: 60000, reporter: 'list' });
+	var acceptance = new Mocha({timeout: 60000, reporter: 'spec' });
 
 	fs.readdirSync('./test/acceptance/')
 		.filter(function(file){ return file.substr(-3) === '.js';})
@@ -16,7 +16,7 @@ var runAcceptanceTests = function(callback){
 
 var runUnitTests = function(callback){
 	console.log('Running unit tests...');
-	var unit = new Mocha({ reporter: 'list'});
+	var unit = new Mocha({ reporter: 'spec'});
 
 	fs.readdirSync('./test/unit/')
 		.filter(function(file){ return file.substr(-3) === '.js';})

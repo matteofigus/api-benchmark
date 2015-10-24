@@ -1,35 +1,39 @@
 'use strict';
 
+var injectr = require('injectr');
 var should = require('should');
-var Timer = require('./../../lib/timer');
 
 describe('Timer class', function(){
 
-  it('should correctly perform a time count', function(done){
-    var timer = new Timer();
-
-    timer.start();
-    setTimeout(function() {
-      timer.stop();
-      timer.time.should.be.within(0.09, 0.12);
-      done();
-    }, 100);
+  var Timer = injectr('./../../lib/timer.js', {}, {
+    process: {
+      hrtime: function(start){
+        return start ? [10, 0] : [235389, 949793216];
+      }
+    }
   });
 
-  it('should correctly perform a stop + restart action', function(done){
+  it('should correctly perform a time count', function(){
     var timer = new Timer();
 
+    // Process.hrtime is mocked to return a 10 seconds timer
     timer.start();
-    setTimeout(function() {
-      timer.stop();
-      setTimeout(function() {
-        timer.start();
-        setTimeout(function() {
-          timer.stop();
-          timer.time.should.be.within(0.19, 0.22);
-          done();
-        }, 100);
-      }, 100);
-    }, 100);
+    timer.stop();
+
+    timer.time.should.be.eql(10);
+  });
+
+  it('should correctly perform a stop + restart action', function(){
+    var timer = new Timer();
+
+    // Process.hrtime is mocked to return a 10 seconds timer
+    timer.start();
+    timer.stop();
+
+    // Process.hrtime is mocked to return a 10 seconds timer
+    timer.start();
+    timer.stop();
+
+    timer.time.should.be.eql(20);
   });
 });
