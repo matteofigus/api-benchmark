@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -10,6 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.highlighter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.cursor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/jquery.jqplot.min.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/dark.min.css" type="text/css" />
@@ -382,6 +384,10 @@
                 show: true,
                 sizeAdjust: 7.5
               },
+              cursor:{
+                show: true,
+                zoom:true,
+              },
               legend: {
                 show:true,
                 location: 'se',
@@ -418,28 +424,36 @@
         for(serviceName in data.benchmark){
           for(routeName in data.benchmark[serviceName]){
             var samples = data.benchmark[serviceName][routeName]['stats']['sample'];
-            var buckets = [[0.001, 0], [0.005, 0], [0.01, 0], [0.015, 0], [0.025, 0], [0.05, 0], [0.1, 0], [0.25, 0], [0.333, 0], [0.5, 0], [0.750, 0], [1.5, 0], [3, 0], [6, 0], [12, 0], [50, 0], [100, 0], [300, 0], [1000, 0]];
-            for(var i = 0; i<samples.length; i++) {
-              for (var j =0; j<buckets.length; j++) {
-                if(buckets[j][0]>= samples[i]){
-                  buckets[j][1] += 100/samples.length;
-                  break;
-                }
-              };
+            var sortedSamples = _.orderBy(samples);
+            var totalDelta = sortedSamples[sortedSamples.length - 1] - sortedSamples[0];
+
+            var bucketCount = ~~Math.min(totalDelta*1000, sortedSamples.length);
+            var delta = totalDelta/bucketCount;
+
+            var buckets = [[sortedSamples[0] + delta/2.0, 0]];
+
+            for (var i = 0; i < samples.length; i++) {
+              var s = sortedSamples[i];
+              while(s > (sortedSamples[0] + buckets.length * delta)) {
+                buckets.push([(sortedSamples[0] + buckets.length * delta + delta/2.0), 0]);
+              }
+              buckets[buckets.length - 1][1]++;
             }
 
-            var distribution = [];
-            for(i =0; i<buckets.length; i++) {
-              if(buckets[i][1]){
-                distribution.push(buckets[i]);
-              }
-            }
-            var lines = [distribution],
+            buckets = _.map(buckets, function(b){
+              return [b[0], 100*b[1]/samples.length];
+            });
+
+
+            var lines = [buckets],
                 series = [{
                   showMarker: false,
                   pointLabels: { show: true },
                   label: 'Samples',
-                  color: '#6699FF'
+                  color: '#6699FF',
+                  rendererOptions: {
+                    smooth: true
+                  }
                 }];
 
             var options = {
@@ -464,6 +478,10 @@
                 show:true,
                 location: 'se',
                 background: 'rgba(101, 0, 253, 0.89)'
+              },
+              cursor:{
+                show: true,
+                zoom:true,
               },
               axesDefaults: {
                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
