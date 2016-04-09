@@ -2,7 +2,9 @@ api-benchmark
 =============
 
 A node.js tool that measures and compares performances of single and multiple apis inspired by [BenchmarkJs](http://benchmarkjs.com/).
-[Why all of this?](http://tech.opentable.co.uk/blog/2014/02/28/api-benchmark/)
+[![Gitter](https://badges.gitter.im/matteofigus/api-benchmark.svg)](https://gitter.im/matteofigus/api-benchmark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+[Why all of this? (blog post)](http://tech.opentable.co.uk/blog/2014/02/28/api-benchmark/)
 
 ![https://raw.github.com/matteofigus/api-benchmark-www/master/public/images/screen-shot.png](https://raw.github.com/matteofigus/api-benchmark-www/master/public/images/screen-shot.png)
 
