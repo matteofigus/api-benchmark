@@ -39,7 +39,7 @@
     "should": "8.3.1"
   },
   "scripts": {
-    "pretest": "node ./node_modules/.bin/jshint lib test templates index.js",
+    "pretest": "jshint lib test templates index.js",
     "test": "node test/index"
   },
   "contributors": [
