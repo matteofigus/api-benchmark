@@ -29,17 +29,17 @@
   "dependencies": {
     "superagent": "1.8.3",
     "underscore": "1.8.3",
-    "give-me": "0.1.0"
+    "give-me": "0.1.0",
   },
   "devDependencies": {
     "http-test-servers": "1.0.0",
     "injectr": "^0.5.1",
-    "jshint": "2.9.2",
-    "mocha": "",
+    "jshint": "^2.9.2",
+    "mocha": "2.3.3",
     "should": "8.3.1"
   },
   "scripts": {
-    "pretest": "jshint lib test templates index.js",
+    "pretest": "node ./node_modules/.bin/jshint lib test templates index.js",
     "test": "node test/index"
   },
   "contributors": [
