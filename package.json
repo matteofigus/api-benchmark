@@ -27,19 +27,19 @@
     "npm": ">=1.2.x"
   },
   "dependencies": {
+    "give-me": "0.1.0",
+    "jshint": "^2.9.2",
     "superagent": "0.19.0",
-    "underscore": "1.6.0",
-    "give-me": "0.1.0"
+    "underscore": "1.6.0"
   },
   "devDependencies": {
     "http-test-servers": "0.0.12",
     "injectr": "^0.5.1",
-    "jshint": "2.5.10",
     "mocha": "",
     "should": "3.3.2"
   },
   "scripts": {
-    "pretest": "jshint lib test templates index.js",
+    "pretest": "node ./node_modules/.bin/jshint lib test templates index.js",
     "test": "node test/index"
   },
   "contributors": [
