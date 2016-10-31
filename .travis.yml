@@ -4,6 +4,5 @@ before_script:
   - "npm install -g jshint@^2.9.2"
 
 node_js:
-  - "0.10"
-  - "4"
-  - "5"
+  - '4'
+  - '5'

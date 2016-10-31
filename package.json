@@ -23,7 +23,7 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">=0.8.x",
+    "node": ">= 4",
     "npm": ">=1.2.x"
   },
   "dependencies": {
