@@ -196,6 +196,9 @@ sudo sysctl -w kern.ipc.somaxconn=20000
 ulimit -S -n 20000
 ```
 
+# Docker version
+Containerized version of api-benchmark is available here: [docker-api-benchmark](https://hub.docker.com/r/johnshumon/docker-api-benchmark/)
+
 # Contributing
 
 For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
