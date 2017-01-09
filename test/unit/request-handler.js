@@ -17,7 +17,8 @@ describe('requestHandler.setup function', function(){
 
     var suiteObj = {
       endpoint: {
-        aProperty: 'value'
+        aProperty: 'value',
+        route: 'someRoute'
       },
       runner: {
         add: function(suiteName, suiteHref, suiteOptions, suiteRequest, callback){
@@ -26,11 +27,12 @@ describe('requestHandler.setup function', function(){
       }
     };
 
-    requestHandler.setup('suiteName', 'suiteHref', suiteObj, fakeAgent);
+    requestHandler.setup('suiteName', 'serviceRoot', suiteObj, fakeAgent);
 
     var req = fakeAgentStack[0][0];
 
-    req.url.should.be.eql('suiteHref');
+    req.route.should.be.eql('someRoute');
+    req.service.should.be.eql('serviceRoot');
     req.aProperty.should.be.eql('value');
 
     done();

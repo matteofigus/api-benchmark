@@ -18,6 +18,7 @@ describe('requestAgent.make function', function(){
 
   it('should correctly handle null data', function(done){
       requestAgent.make({
+        service: 'root',
         route: '/post',
         method: 'post',
         data: null
@@ -29,6 +30,7 @@ describe('requestAgent.make function', function(){
 
   it('should correctly handle undefined data', function(done){
       requestAgent.make({
+        service: 'root',
         route: '/post',
         method: 'post',
         data: undefined
@@ -48,6 +50,7 @@ describe('requestAgent.make function', function(){
     };
 
     var request = {
+      service: 'root',
       route: '/post',
       method: 'post',
       data: dataFunc
@@ -72,6 +75,7 @@ describe('requestAgent.make function', function(){
     };
 
     var request = {
+      service: 'root',
       route: '/get',
       method: 'get',
       query: queryFunc
@@ -88,6 +92,7 @@ describe('requestAgent.make function', function(){
 
   it('should correctly handle cookies', function(done){
       requestAgent.make({
+        service: 'root',
         route: '/get',
         method: 'get',
         headers: {
@@ -101,6 +106,7 @@ describe('requestAgent.make function', function(){
 
   it('should correctly handle headers', function(done){
       requestAgent.make({
+        service: 'root',
         route: '/get',
         method: 'get',
         headers: {
@@ -124,6 +130,7 @@ describe('requestAgent.make function', function(){
     };
 
     var request = {
+      service: 'root',
       route: '/get',
       method: 'get',
       headers: headersFunc
