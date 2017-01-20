@@ -37,6 +37,41 @@ describe('requestHandler.setup function', function(){
 
     done();
   });
+
+  it('should properly handle dynamic routes', function(done){
+
+    var fakeAgentStack = [];
+
+    var fakeAgent = {
+      make: function(){
+        fakeAgentStack.push(arguments);
+      }
+    };
+
+    var suiteObj = {
+      endpoint: {
+        aProperty: 'value',
+        route: function () {
+          return 'someDynamicRoute';
+        }
+      },
+      runner: {
+        add: function(suiteName, suiteHref, suiteOptions, suiteRequest, callback){
+          suiteRequest.route.should.be.eql('Dynamic route on serviceRoot');
+          callback();
+        }
+      }
+    };
+
+    requestHandler.setup('suiteName', 'serviceRoot', suiteObj, fakeAgent);
+
+    var req = fakeAgentStack[0][0];
+    req.route.should.be.a.Function();
+    req.service.should.be.eql('serviceRoot');
+    req.aProperty.should.be.eql('value');
+
+    done();
+  });
 });
 
 describe('requestHandler.make function', function(){
