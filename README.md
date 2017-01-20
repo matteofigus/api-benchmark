@@ -141,7 +141,7 @@ apiBenchmark.measure(service, routes, function(err, results){
   (String, default 'get'): Http verb.
 
 #### route
-  (String): the route to benchmark
+  (String): the route to benchmark. In case of function (that has to return an string) it will be evaulated for each request.
 
 #### headers
   (Object): the headers to send. In case of function (that has to return an object) it will be evaulated for each request.
