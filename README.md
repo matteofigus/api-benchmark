@@ -1,6 +1,8 @@
 api-benchmark
 =============
 
+[![Join the chat at https://gitter.im/matteofigus/api-benchmark](https://badges.gitter.im/matteofigus/api-benchmark.svg)](https://gitter.im/matteofigus/api-benchmark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A node.js tool that measures and compares performances of single and multiple apis inspired by [BenchmarkJs](http://benchmarkjs.com/).
 [![Gitter](https://badges.gitter.im/matteofigus/api-benchmark.svg)](https://gitter.im/matteofigus/api-benchmark?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
