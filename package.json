@@ -35,7 +35,7 @@
     "http-test-servers": "1.0.0",
     "injectr": "^0.5.1",
     "jshint": "^2.9.2",
-    "mocha": "3.5.3",
+    "mocha": "4.0.0",
     "should": "13.1.0"
   },
   "scripts": {
