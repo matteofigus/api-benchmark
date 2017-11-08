@@ -27,7 +27,7 @@
     "npm": ">=1.2.x"
   },
   "dependencies": {
-    "superagent": "3.6.3",
+    "superagent": "3.8.1",
     "underscore": "1.8.3",
     "give-me": "0.1.0"
   },
