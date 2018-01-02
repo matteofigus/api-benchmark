@@ -43,7 +43,7 @@ npm install api-benchmark
 
 # Usage
 
-### measure(service, [routes](#route-object), [[options](#options-object), ] callback)
+### measure(service, [routes](#route-object), [[options](#options-object)], callback)
 
 Measures performances of a given api for multiple routes
 
@@ -62,7 +62,7 @@ apiBenchmark.measure(service, routes, function(err, results){
 });
 ```
 
-### compare(services, [routes](#route-object), [[options](#options-object), ] callback)
+### compare(services, [routes](#route-object), [[options](#options-object)], callback)
 
 Compares performances of a given list of api servers with the same routes. Useful in case of load balancers, globalised services, deployment of new versions.
 
