@@ -36,7 +36,7 @@
     "injectr": "^0.5.1",
     "jshint": "^2.9.2",
     "mocha": "3.5.3",
-    "should": "13.2.0"
+    "should": "13.2.1"
   },
   "scripts": {
     "pretest": "jshint lib test templates index.js",
