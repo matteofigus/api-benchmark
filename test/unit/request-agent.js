@@ -18,6 +18,7 @@ describe('requestAgent.make function', function(){
 
   it('should correctly handle null data', function(done){
       requestAgent.make({
+        service: 'http://service/',
         route: '/post',
         method: 'post',
         data: null
@@ -29,6 +30,7 @@ describe('requestAgent.make function', function(){
 
   it('should correctly handle undefined data', function(done){
       requestAgent.make({
+        service: 'http://service/',
         route: '/post',
         method: 'post',
         data: undefined
@@ -36,6 +38,30 @@ describe('requestAgent.make function', function(){
         _.isUndefined(fakeResults.data).should.be.eql(true);
         done();
       });
+  });
+
+  it('should correctly handle route as a function', function(done){
+
+    var i = 0;
+
+    var routeFunc = function(){
+      i++;
+      return '/endpoint'+i;
+    };
+
+    var request = {
+      service: 'http://service/',
+      route: routeFunc,
+      method: 'post'
+    };
+
+    requestAgent.make(request, function(err, fakeResults){
+      fakeResults.url.should.be.eql('http://service/endpoint1');
+      requestAgent.make(request, function(err, fakeResults){
+        fakeResults.url.should.be.eql('http://service/endpoint2');
+        done();
+      });
+    });
   });
 
   it('should correctly handle data as a function', function(done){
@@ -48,6 +74,7 @@ describe('requestAgent.make function', function(){
     };
 
     var request = {
+      service: 'http://service/',
       route: '/post',
       method: 'post',
       data: dataFunc
@@ -72,6 +99,7 @@ describe('requestAgent.make function', function(){
     };
 
     var request = {
+      service: 'http://service/',
       route: '/get',
       method: 'get',
       query: queryFunc
@@ -88,6 +116,7 @@ describe('requestAgent.make function', function(){
 
   it('should correctly handle cookies', function(done){
       requestAgent.make({
+        service: 'http://service/',
         route: '/get',
         method: 'get',
         headers: {
@@ -101,6 +130,7 @@ describe('requestAgent.make function', function(){
 
   it('should correctly handle headers', function(done){
       requestAgent.make({
+        service: 'http://service/',
         route: '/get',
         method: 'get',
         headers: {
@@ -124,6 +154,7 @@ describe('requestAgent.make function', function(){
     };
 
     var request = {
+      service: 'http://service/',
       route: '/get',
       method: 'get',
       headers: headersFunc

@@ -224,9 +224,15 @@
             '<li>99% Percentile: ' + fixNumber(routeData.stats.p99, 6) + '</li>' +
             '<li>99.9% Percentile: ' + fixNumber(routeData.stats.p999, 6) + '</li>' +
             '</ul></div></div><div class="distribution panel"><div class="distchart" id="distchart' + i + '">' +
-            '</div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() +
-            ' <a href="' + routeData.href + '" target="_blank">' +
-            routeData.href + '</a><br />Concurrency level: ' + routeData.options.concurrencyLevel + '<br />';
+            '</div></div><div class="request panel hide">Request: ' + routeData.options.method.toUpperCase() + ' ';
+
+          if (routeData.href.indexOf('Dynamic route') > -1) {
+            template += routeData.href;
+          } else {
+            template += '<a href="' + routeData.href + '" target="_blank">' + routeData.href + '</a>';
+          }
+
+          template += '<br />Concurrency level: ' + routeData.options.concurrencyLevel + '<br />';
 
           if(routeData.options.delay)
             template += 'Delay between bench cycles: ' + routeData.options.delay + '<br />';

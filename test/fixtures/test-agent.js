@@ -1,20 +1,23 @@
 'use strict';
 
-module.exports.FakeAgent = function(){ 
+module.exports.FakeAgent = function(){
 
   this.end = function(callback){
     callback(null, {
+      url: this.url,
       data: this.data,
       headers: this.headers,
       query: this.queryData
     });
   };
 
-  this.get = function(request){
+  this.get = function(url){
+    this.url = url;
     return this;
   };
 
-  this.post = function(request){
+  this.post = function(url){
+    this.url = url;
     return this;
   };
 
