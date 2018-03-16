@@ -1,8 +1,5 @@
 language: node_js
 
-before_script:    
-  - "npm install -g jshint@^2.9.2"
-
 node_js:
   - '4'
   - '5'

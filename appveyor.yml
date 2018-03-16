@@ -16,7 +16,6 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
-  - npm install -g jshint@2.5.10
 
 build: off
 
