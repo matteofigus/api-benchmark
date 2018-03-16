@@ -222,13 +222,11 @@ Containerized version of api-benchmark is available here: [docker-api-benchmark]
 
 # Contributing
 
+**This project is actively looking for contributors. If you wish to be involved, please open an issue and get in touch. Thanks!**
+
 For the latest updates and release information follow [@matteofigus](https://twitter.com/matteofigus) on twitter.
 Feel free to open new Issues in case of Bugs or Feature requests.
 Pull requests are welcome: first run all the tests locally doing `npm test`.
-
-Contributing:
-
-This project is actively looking for contributors. If you wish to be involved, please open an issue and get in touch. Thanks!
 
 ### Tests
 
