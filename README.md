@@ -1,5 +1,4 @@
-api-benchmark
-=============
+# api-benchmark
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/matteofigus/api-benchmark.svg)](https://greenkeeper.io/)
 
@@ -14,18 +13,18 @@ To see an example of a request/response [look at this gist](https://gist.github.
 
 If you want to benchmark your api via [grunt](http://gruntjs.com/) take a look at [grunt-api-benchmark](https://github.com/matteofigus/grunt-api-benchmark).
 
-1. [Requirements](#requirements)
-1. [Installation](#installation)
-1. [Usage](#usage)
-  1. API
-    * [`measure`](#measureservice-routes-options--callback)
-    * [`compare`](#compareservices-routes-options--callback)
-    * [`getHtml`](#gethtmlresults-callback)
-  1. [The `Route` object](#route-object)
-  1. [The `Options` object](#options-object)
-1. [Tuning your machine to benchmark](#tuning)
-1. [Contributing](#contributing)
-1. [Why all of this?](http://tech.opentable.co.uk/blog/2014/02/28/api-benchmark/)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Usage](#usage)
+* API
+  * [`measure`](#measureservice-routes-options--callback)
+  * [`compare`](#compareservices-routes-options--callback)
+  * [`getHtml`](#gethtmlresults-callback)
+* [The `Route` object](#route-object)
+* [The `Options` object](#options-object)
+* [Tuning your machine to benchmark](#tuning)
+* [Contributing](#contributing)
+* [Why all of this?](http://tech.opentable.co.uk/blog/2014/02/28/api-benchmark/)
 
 # Requirements
 
@@ -51,12 +50,12 @@ Measures performances of a given api for multiple routes
 var apiBenchmark = require('api-benchmark');
 
 var service = {
-  server1: "http://myserver:myport/mypath/"
+  server1: 'http://myserver:myport/mypath/'
 };
 
 var routes = { route1: 'route1', route2: 'route2' };
 
-apiBenchmark.measure(service, routes, function(err, results){
+apiBenchmark.measure(service, routes, function(err, results) {
   console.log(results);
   // displays some stats!
 });
@@ -70,13 +69,13 @@ Compares performances of a given list of api servers with the same routes. Usefu
 var apiBenchmark = require('api-benchmark');
 
 var services = {
-  server1: "http://myserver:myport/mypath/",
-  server2: "http://myserver2:myport2/mypath2/",
+  server1: 'http://myserver:myport/mypath/',
+  server2: 'http://myserver2:myport2/mypath2/'
 };
 
 var routes = { route1: 'route1', route2: 'route2' };
 
-apiBenchmark.compare(services, routes, function(err, results){
+apiBenchmark.compare(services, routes, function(err, results) {
   console.log(results);
   // displays some stats, including the winner!
 });
@@ -88,8 +87,8 @@ All the Http verbs and headers are supported.
 var apiBenchmark = require('api-benchmark');
 
 var services = {
-  server1: "http://myserver:myport/mypath/",
-  server2: "http://myserver2:myport2/mypath2/",
+  server1: 'http://myserver:myport/mypath/',
+  server2: 'http://myserver2:myport2/mypath2/'
 };
 
 var routes = {
@@ -97,8 +96,8 @@ var routes = {
     method: 'get',
     route: 'getRoute',
     headers: {
-      'Cookie': 'cookieName=value',
-      'Accept': 'application/json'
+      Cookie: 'cookieName=value',
+      Accept: 'application/json'
     }
   },
   route2: 'getRoute2',
@@ -112,25 +111,27 @@ var routes = {
   }
 };
 
-apiBenchmark.compare(services, routes, function(err, results){
+apiBenchmark.compare(services, routes, function(err, results) {
   console.log(results);
   // displays some stats, including the winner!
 });
 ```
 
 ### getHtml(results, callback)
+
 Given a results object, gets the html report.
+
 ```js
 var apiBenchmark = require('api-benchmark');
 
 var service = {
-  server1: "http://myserver:myport/mypath/"
+  server1: 'http://myserver:myport/mypath/'
 };
 
 var routes = { route1: 'route1', route2: 'route2' };
 
-apiBenchmark.measure(service, routes, function(err, results){
-  apiBenchmark.getHtml(results, function(error, html){
+apiBenchmark.measure(service, routes, function(err, results) {
+  apiBenchmark.getHtml(results, function(error, html) {
     console.log(html);
     // now save it yourself to a file and enjoy
   });
@@ -140,57 +141,74 @@ apiBenchmark.measure(service, routes, function(err, results){
 ### Route object
 
 #### method
-  (String, default 'get'): Http verb.
+
+(String, default 'get'): Http verb.
 
 #### route
-  (String): the route to benchmark
+
+(String): the route to benchmark
 
 #### headers
-  (Object): the headers to send. In case of function (that has to return an object) it will be evaulated for each request.
+
+(Object): the headers to send. In case of function (that has to return an object) it will be evaulated for each request.
 
 #### data
-  (Object): the data sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
+
+(Object): the data sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
 
 #### query
-  (Object): the query sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
+
+(Object): the query sent with the request. In case of function (that has to return an object) it will be evaulated for each request.
 
 #### expectedStatusCode
-  (Number, default null): if it is a number, generates an error when the status code of the response is different
+
+(Number, default null): if it is a number, generates an error when the status code of the response is different
 
 #### maxMean
-  (Number, default null): if it is a number, generates an error when the mean value for a benchmark cycle is major than the expected value
+
+(Number, default null): if it is a number, generates an error when the mean value for a benchmark cycle is major than the expected value
 
 #### maxSingleMean
-  (Number, default null): if it is a number, generates an error when the mean across all the concurrent requests value is major than the expected value
+
+(Number, default null): if it is a number, generates an error when the mean across all the concurrent requests value is major than the expected value
 
 ### Options object
 
 #### debug
-  (Boolean, default false): Displays some info on the console.
+
+(Boolean, default false): Displays some info on the console.
 
 #### runMode
-  (String, default 'sequence'): Can be 'sequence' (each request is made after receiving the previous response) or 'parallel' (all requests are made in parallel).
+
+(String, default 'sequence'): Can be 'sequence' (each request is made after receiving the previous response) or 'parallel' (all requests are made in parallel).
 
 #### maxConcurrentRequests
-  (Number, default 100): When in runMode='parallel' it is the maximum number of concurrent requests are made.
+
+(Number, default 100): When in runMode='parallel' it is the maximum number of concurrent requests are made.
 
 #### delay
-  (Number, default 0): When in runMode='sequence', it is the delay between test cycles (secs).
+
+(Number, default 0): When in runMode='sequence', it is the delay between test cycles (secs).
 
 #### maxTime
-  (Number, default 10): The maximum time a benchmark is allowed to run before finishing (secs).
-  Note: Cycle delays aren't counted toward the maximum time.
+
+(Number, default 10): The maximum time a benchmark is allowed to run before finishing (secs).
+Note: Cycle delays aren't counted toward the maximum time.
 
 #### minSamples
-  (Number, default 20): The minimum sample size required to perform statistical analysis.
+
+(Number, default 20): The minimum sample size required to perform statistical analysis.
 
 #### stopOnError
-  (Boolean, default true): Stops the benchmark as soon as it receives an error. When false, the benchmark goes on and the errors are collected inside the callback.
+
+(Boolean, default true): Stops the benchmark as soon as it receives an error. When false, the benchmark goes on and the errors are collected inside the callback.
 
 # Tuning
+
 You should tune your machine to remove any OS limits in terms of opening and quickly recycling sockets.
 
 ### Linux and Mac OS X
+
 ```sh
 sudo sysctl -w kern.maxfiles=25000
 sudo sysctl -w kern.maxfilesperproc=24500
@@ -199,6 +217,7 @@ ulimit -S -n 20000
 ```
 
 # Docker version
+
 Containerized version of api-benchmark is available here: [docker-api-benchmark](https://hub.docker.com/r/johnshumon/docker-api-benchmark/)
 
 # Contributing
@@ -207,10 +226,9 @@ For the latest updates and release information follow [@matteofigus](https://twi
 Feel free to open new Issues in case of Bugs or Feature requests.
 Pull requests are welcome: first run all the tests locally doing `npm test`.
 
-Contributors:
+Contributing:
 
-* [Derek Myers](https://github.com/dmyers)
-* [Michael Sanford](https://github.com/michaelsanford)
+This project is actively looking for contributors. If you wish to be involved, please open an issue and get in touch. Thanks!
 
 ### Tests
 

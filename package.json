@@ -1,7 +1,8 @@
 {
   "name": "api-benchmark",
   "version": "0.4.2",
-  "description": "A simple nodejs tool to measure and compare performances of api services",
+  "description":
+    "A simple nodejs tool to measure and compare performances of api services",
   "author": "Matteo Figus <matteofigus@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -39,8 +40,7 @@
     "should": "13.2.1"
   },
   "scripts": {
-    "pretest": "jshint lib test templates index.js",
-    "test": "node test/index"
+    "test": "jshint lib test templates index.js && node test/index"
   },
   "contributors": [
     {
