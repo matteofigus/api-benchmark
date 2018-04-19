@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "superagent": "3.8.2",
-    "underscore": "1.8.3",
+    "underscore": "1.9.0",
     "give-me": "0.1.0"
   },
   "devDependencies": {
