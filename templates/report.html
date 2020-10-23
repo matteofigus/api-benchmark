@@ -291,6 +291,9 @@
         var counter = 0;
         for(serviceName in data.benchmark){
           for(routeName in data.benchmark[serviceName]){
+            if(routeName == 'isSlowest' || routeName == 'isFastest') { 
+              continue; 
+            }
             $(selectors.charts).append(templates.route(data.benchmark[serviceName][routeName], counter));
 
             var samples = data.benchmark[serviceName][routeName]['stats']['sample'],
@@ -423,6 +426,9 @@
         var counter = 0;
         for(serviceName in data.benchmark){
           for(routeName in data.benchmark[serviceName]){
+            if(routeName == 'isSlowest' || routeName == 'isFastest') { 
+              continue; 
+            }
             var samples = data.benchmark[serviceName][routeName]['stats']['sample'];
             var sortedSamples = _.orderBy(samples);
             var totalDelta = sortedSamples[sortedSamples.length - 1] - sortedSamples[0];
